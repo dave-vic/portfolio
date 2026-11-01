@@ -2,20 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens from the Figma design system */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bone: #eeebe4;
+  --ink: #141414;
+  --ink-2: #3a3a37;
+  --laterite: #a93f15;
+  --laterite-2: #a84014;
+  --muted: #767672;
+  --muted-small: #6b6b67;
+  --on-dark: #f5f2ec;
+  --line: #e3e1dc;
+  --night: #201e1c;
+  --peach: #e58a63;
+  --sand: #e2ded5;
+
+  --f-display: "Anton", Impact, sans-serif;
+  --f-sans: "Archivo Variable", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  --f-serif: "Libre Caslon Text", Georgia, serif;
+  --f-pixel: "Doto", var(--f-mono);
+
+  /* one design pixel. Mobile frame = 430, tablet = 834, desktop = 1728 */
+  --u: calc(100vw / 430);
+}
+@media (min-width: 640px) {
+  :root { --u: calc(100vw / 834); }
+}
+@media (min-width: 1100px) {
+  :root { --u: calc(min(100vw, 1920px) / 1728); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html { background: var(--bone); overflow-x: hidden; }
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
+* { box-sizing: border-box; }
+img { display: block; max-width: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+p { margin: 0; }
+
+/* which layout shows at which width */
+.only-m, .only-t, .only-d { display: none; }
+@media (max-width: 639.98px) { .only-m { display: block; } }
+@media (min-width: 640px) and (max-width: 1099.98px) { .only-t { display: block; } }
+@media (min-width: 1100px) { .only-d { display: block; } }
+
+/* type helpers */
+.mono { font-family: var(--f-mono); font-weight: 400; }
+.anton { font-family: var(--f-display); font-weight: 400; }
+.sans { font-family: var(--f-sans); }
+.serif { font-family: var(--f-serif); }
+.pixel { font-family: var(--f-pixel); font-weight: 900; }
+.nowrap { white-space: nowrap; }
+.pre { white-space: pre; }
+
+/* absolute-layout section */
+.abs { position: absolute; }
+.sec { position: relative; overflow: hidden; }
+
+/* focus */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--laterite);
+  outline-offset: 3px;
+}
+
+/* marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+
+@keyframes ping { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+.ping { animation: ping 2.2s cubic-bezier(.2,.7,.1,1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .ping { animation: none !important; }
+}
+
+/* form fields */
+.field { width: 100%; border: 0; background: transparent; padding: 0; color: var(--ink); outline: none; resize: none; }
+.field::placeholder { color: var(--ink); opacity: .5; }
