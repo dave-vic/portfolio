@@ -19,7 +19,7 @@ const cynteract: CaseData = {
       { x: 479, y: 365.5, w: 820, h: 456, rot: 2, r: 12, shadow: 0.2, img: { src: P + "welcome.webp", alt: "Home: Blob says welcome to Cynteract" } },
       { x: 1290, y: 160, w: 400, h: 447, rot: 6, r: 12, shadow: 0.2, img: { src: P + "users-p.webp", alt: "Target user groups, from stroke to ADHD" } },
     ],
-    sticker: { lines: ["PROJECT 18", "LIVE", "BUILT BY ME"] },
+    sticker: { lines: ["PROJECT 18", "LIVE", "BUILT 2024"] },
     meta: [["CLIENT", "CYNTERACT · GERMANY, REMOTE"], ["ROLE", "BUILT THE WEBSITE · PM · SCRUM MASTER"], ["BUILT WITH", "ONE.COM"]],
     stat: "GLOVE · STRAP · CUSHION · REHABILITATION THAT FEELS LIKE A GAME",
   },

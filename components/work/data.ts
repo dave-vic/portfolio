@@ -78,6 +78,6 @@ export const PROJECTS: Project[] = [
     sector: "FINTECH · PAYMENTS", role: "UX · UI · WEB · CONCEPT", year: "2026", meta: "FINTECH · PAYMENTS · UX · UI · CONCEPT · 2026",
     href: "/work/ghipss", cats: ["DESIGN", "PRODUCT"], thumb: img("ghipss", "top") },
   { n: "18", title: "Cynteract website", desc: "The website for a German health-tech company whose glove, strap and cushion turn rehabilitation into games. I built it myself on one.com, alongside running the team’s sprints.",
-    sector: "HEALTH TECH · GERMANY", role: "BUILT IT · ONE.COM · PM", year: "2025 · LIVE", meta: "HEALTH TECH · GERMANY · BUILT IT · 2025 · LIVE",
+    sector: "HEALTH TECH · GERMANY", role: "BUILT IT · ONE.COM · PM", year: "2024 · LIVE", meta: "HEALTH TECH · GERMANY · BUILT IT · 2024 · LIVE",
     href: "/work/cynteract", cats: ["DESIGN", "PRODUCT"], thumb: img("cynteract") },
 ];
