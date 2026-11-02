@@ -52,10 +52,10 @@ function RowD({ p }: { p: Project }) {
     <Shell p={p} style={{ position: "relative", height: u(230), borderTop: "1px solid var(--ink)" }}>
       <p className="mono abs" style={{ ...at(0, 31), ...t(11, 1.4, 0.33), color: "var(--laterite)" }}>{p.n}</p>
       <div className="wk-thumb" style={{ ...at(54, 29, 280, 170), overflow: "hidden" }}><Thumb p={p} bp="d" /></div>
-      <h2 className="sans wk-title" style={{ ...at(374, 27, 520), ...t(38, 1.1, -0.57), fontWeight: 500, margin: 0 }}>{p.title}</h2>
+      <h2 className="sans wk-title" style={{ ...at(374, 27, 505), ...t(38, 1.1, -0.57), fontWeight: 500, margin: 0 }}>{p.title}</h2>
       <p className="sans" style={{ ...at(374, 81, 440), ...t(16, 1.5), color: "var(--ink-2)" }}>{p.desc}</p>
-      <p className="mono abs nowrap" style={{ ...at(944, 31), ...mono }}>SECTOR<br />{p.sector}</p>
-      <p className="mono abs" style={{ ...at(1094, 31, 300), ...mono }}>ROLE<br />{p.role}</p>
+      <p className="mono abs" style={{ ...at(905, 31, 195), ...mono }}>SECTOR<br />{p.sector}</p>
+      <p className="mono abs" style={{ ...at(1110, 31, 290), ...mono }}>ROLE<br />{p.role}</p>
       <p className="mono abs nowrap" style={{ ...at(1424, 31), ...mono }}>YEAR<br />{p.year}</p>
       <span className="abs" style={at(1564, 29)}><Arrow p={p} size={28} lh={1.4} /></span>
     </Shell>

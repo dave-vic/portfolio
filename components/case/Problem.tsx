@@ -21,7 +21,7 @@ export default function Problem({ c }: { c: CaseData }) {
           </Reveal>
         ))}
         {p.notes.map((n, i) => (
-          <Reveal key={i} delay={0.3 + i * 0.15} y={24} style={at(n.x, n.y, n.w ?? 250)}>
+          <Reveal key={i} delay={0.3 + i * 0.15} y={24} style={at(n.x, n.y, (n.w ?? 250) - 24)}>
             <p style={{ ...mono(11, 6), color: p.tagColor }}>{n.tag}</p>
             <p style={{ ...t(24, "normal"), fontWeight: 500, marginTop: u(10) }}>{n.title}</p>
             <p style={{ position: "absolute", top: u(90), width: "100%", ...t(15, 1.4), color: BODY }}>{n.body}</p>

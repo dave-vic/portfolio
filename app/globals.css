@@ -61,10 +61,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 p { margin: 0; }
 
 /* which layout shows at which width */
-.only-m, .only-t, .only-d { display: none; }
-@media (max-width: 639.98px) { .only-m { display: block; } }
-@media (min-width: 640px) and (max-width: 1099.98px) { .only-t { display: block; } }
-@media (min-width: 1100px) { .only-d { display: block; } }
+/* one layout per breakpoint; the others are hidden even when a component sets its own display (flex, grid) */
+@media (min-width: 640px) { .only-m { display: none !important; } }
+@media (max-width: 639.98px), (min-width: 1100px) { .only-t { display: none !important; } }
+@media (max-width: 1099.98px) { .only-d { display: none !important; } }
 
 /* type helpers */
 .mono { font-family: var(--f-mono); font-weight: 400; }

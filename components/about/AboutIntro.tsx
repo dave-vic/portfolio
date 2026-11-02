@@ -44,12 +44,14 @@ export default function AboutIntro() {
       <div className="only-d sec" style={{ height: u(1117), background: "var(--ink)" }}>
         <Slide from="l" style={{ ...at(12, 12, 1006.74, 537) }}><img decoding="async" src="/home/panel-identity.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
         <Slide from="r" delay={0.1} style={{ ...at(753.49, 12, 962.55, 537) }}><img decoding="async" src="/about/intro-panel.webp" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%" }} /></Slide>
+        {/* soft shade at the top of the photo so the navigation reads over it */}
+        <div aria-hidden style={{ ...at(1000, 12, 716, 120), background: "linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,0))", borderTopRightRadius: u(28), pointerEvents: "none" }} />
         <Slide from="l" delay={0.2} style={{ ...at(12, 563, 665.05, 542) }}><img decoding="async" src="/home/panel-gradient.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
         <Slide from="r" delay={0.3} style={{ ...at(408.73, 563, 1307.25, 542) }}><img decoding="async" src="/home/panel-text.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
 
-        {[70, 118, 166, 214].map((y) => <p key={y} className="mono abs" style={{ ...at(56, y), ...t(20, 1) }}>+</p>)}
-        <img decoding="async" src="/home/mark.svg" alt="" style={at(150, 70, 100, 100)} />
-        <div style={at(290, 64)}><Name size={44} /></div>
+        {[134, 182, 230, 278].map((y) => <p key={y} className="mono abs" style={{ ...at(56, y), ...t(20, 1) }}>+</p>)}
+        <img decoding="async" src="/home/mark.svg" alt="" style={at(150, 134, 100, 100)} />
+        <div style={at(290, 128)}><Name size={44} /></div>
         <p className="mono abs pre" style={{ ...at(56, 440), ...t(12, 1.7, 0.24) }}>{`ROLE :       Product design · PM · Analysis · BD · AI\nBASED :      Accra, Ghana`}</p>
         <Dots x={1240} y={34} set={["i-e0.svg", "i-e1.svg", "i-e2.svg"]} />
 
