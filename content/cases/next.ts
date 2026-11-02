@@ -1,6 +1,6 @@
 /** "Next case study" cards. The cases run in a loop:
  *  Talent Hub → Claims → HR portal → MiSika → Medshea → AfriPlay → Talent Hub
- *  Short cases: Loco → Elysium → KB Akuffo → Sway → Know your MoMo → BlaccBook → Stanbic Valentine’s game → GhIPSS → Talent Hub */
+ *  Short cases: Loco → Elysium → KB Akuffo → Sway → Know your MoMo → BlaccBook → Stanbic Valentine’s game → GhIPSS → Cynteract → Talent Hub */
 const box = { x: 1173.7, y: 41.1, w: 520, h: 640, rot: 4, r: 16, shadow: 0.25 };
 type Crop = [number, number, number, number];
 
@@ -47,4 +47,7 @@ export const NEXT = {
   ghipss: { num: "17", title: ["GhIPSS", "redesign  →"], href: "/work/ghipss",
     desc: "A personal redesign of the homepage for Ghana’s interbank payment switch.",
     img: { ...box, img: { src: "/cases/ghipss/hero.webp", alt: "GhIPSS redesign landing", crop: [0.4688, 1, 0.2656, 0] as Crop } } },
+  cynteract: { num: "18", title: ["Cynteract", "website  →"], href: "/work/cynteract",
+    desc: "The website for a German rehab-tech company, built by me on one.com.",
+    img: { ...box, img: { src: "/cases/cynteract/welcome.webp", alt: "Cynteract home with Blob", crop: [0.452, 1, 0.274, 0] as Crop } } },
 };

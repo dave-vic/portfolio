@@ -41,7 +41,7 @@ const ghipss: CaseData = {
       { x: 500, y: 560, w: 740, h: 456, rot: -1, r: 14, shadow: 0.45, img: { src: P + "initiatives.webp", alt: "Strategic initiatives: digital cedi, ISO 20022, universal QR" }, badge: [1175, 520, 90], cap: "INITIATIVES\nDIGITAL CEDI, ISO 20022, UNIVERSAL QR", capAt: [610, 1080, 520] },
     ],
   },
-  next: NEXT["talent-hub"],
+  next: NEXT["cynteract"],
 };
 
 export default ghipss;

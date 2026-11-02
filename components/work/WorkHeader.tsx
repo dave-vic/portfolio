@@ -87,7 +87,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
       ))}
 
       {L.top !== undefined && <p className="mono abs nowrap" style={{ ...at(L.side, L.top + o), ...mono(11, 0.33) }}>(WORK) ALL PROJECTS</p>}
-      <p className="mono abs nowrap" style={{ ...at(L.side, L.bottom + o), ...t(11, L.off ? 1.5 : 1.4, 0.33) }}>17 PROJECTS · 2022 TO 2026</p>
+      <p className="mono abs nowrap" style={{ ...at(L.side, L.bottom + o), ...t(11, L.off ? 1.5 : 1.4, 0.33) }}>18 PROJECTS · 2022 TO 2026</p>
       <p className="mono abs pre" style={{ position: "absolute", right: u(L.side), top: u(L.bottom + o), ...t(11, L.off ? 1.5 : 1.4, 0.33) }}>{`SCROLL  ↓`}</p>
     </div>
   );

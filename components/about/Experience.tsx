@@ -10,7 +10,7 @@ const JOBS = [
   { years: "Now", role: "Product analyst consultant", company: "MojoPay", did: "Product reviews, PRD and requirements input, roadmap priorities and design improvements." },
   { years: "2026", role: "Product designer, independent", company: "Commercial bank, Ghana · NDA", did: "Treasury management system: user journeys, flows, a 42-part design system and 500+ screens." },
   { years: "May 2025 – now", role: "UI/UX designer", company: "Interactive Digital, Accra", did: "Court case management, an HR portal, MiSika USSD loans and Stanbic Bank campaigns." },
-  { years: "Dec 2024 – now", role: "PM, Scrum Master & designer", company: "Cynteract, Germany · Remote", did: "Sprints for a distributed health-tech team: production bugs down 60%, on-time delivery up to 90%." },
+  { years: "Dec 2024 – now", role: "PM, Scrum Master & designer", company: "Cynteract, Germany · Remote", did: "Sprints for a distributed health-tech team: production bugs down 60%, on-time delivery up to 90%. Also built the company website on one.com." },
   { years: "Dec 2024 – now", role: "Product designer", company: "Silver Rock Technologies, Accra", did: "Ghana Talent Hub, AfriPlay and Glo TV streaming, and Elysium Tours." },
   { years: "2023 – 2024", role: "Developer & product designer", company: "Volta River Authority, Accra", did: "National service: system documentation, Figma prototypes and PHP support." },
   { years: "2022 – 2023", role: "UI/UX designer", company: "Iota Digital Lab, USA · Remote", did: "Designed the whole BlaccBook app for finding and booking local businesses, now live on the App Store." },

@@ -77,4 +77,7 @@ export const PROJECTS: Project[] = [
   { n: "17", title: "GhIPSS website redesign", desc: "A personal redesign of the homepage for GhIPSS, which runs Ghana’s interbank payments: a clearer promise, the payment products in one place, and entry points for banks, regulators, retailers and developers.",
     sector: "FINTECH · PAYMENTS", role: "UX · UI · WEB · CONCEPT", year: "2026", meta: "FINTECH · PAYMENTS · UX · UI · CONCEPT · 2026",
     href: "/work/ghipss", cats: ["DESIGN", "PRODUCT"], thumb: img("ghipss", "top") },
+  { n: "18", title: "Cynteract website", desc: "The website for a German health-tech company whose glove, strap and cushion turn rehabilitation into games. I built it myself on one.com, alongside running the team’s sprints.",
+    sector: "HEALTH TECH · GERMANY", role: "BUILT IT · ONE.COM · PM", year: "2025 · LIVE", meta: "HEALTH TECH · GERMANY · BUILT IT · 2025 · LIVE",
+    href: "/work/cynteract", cats: ["DESIGN", "PRODUCT"], thumb: img("cynteract") },
 ];
