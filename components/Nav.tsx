@@ -88,11 +88,11 @@ export default function Nav() {
       >
         {/* desktop */}
         <div className="only-d mono" style={{ position: "relative", height: u(96) }}>
-          <Link href="/" style={{ ...t(12, 1.4), position: "absolute", left: u(56), top: u(36), pointerEvents: "auto" }}>
+          <Link href="/" style={{ ...t(12, 1.4), position: "absolute", left: `calc(var(--gx) + ${u(56)})`, top: u(36), pointerEvents: "auto" }}>
             DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
           <p style={{ ...t(12), position: "absolute", left: "50%", top: u(36), transform: "translateX(-50%)" }} className="nowrap">{label}</p>
-          <nav style={{ position: "absolute", right: u(56), top: u(36), display: "flex", gap: u(28), pointerEvents: "auto" }} aria-label="Main">
+          <nav style={{ position: "absolute", right: `calc(var(--gx) + ${u(56)})`, top: u(36), display: "flex", gap: u(28), pointerEvents: "auto" }} aria-label="Main">
             {LINKS.map((l) => (
               <Link key={l.href} href={l.href} className="navlink" style={t(12)}>{l.label}</Link>
             ))}

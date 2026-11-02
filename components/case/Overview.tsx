@@ -9,7 +9,7 @@ import { EASE, FlowShot, ShotBox, mono } from "./ui";
 function Wipe() {
   return (
     <motion.div
-      aria-hidden
+      aria-hidden className="bleed"
       style={{ position: "absolute", inset: 0, background: "var(--bone)", transformOrigin: "50% 0%", zIndex: 5, pointerEvents: "none" }}
       variants={{ hide: { scaleY: 1 }, show: { scaleY: 0 } }}
       transition={{ duration: 1.1, ease: EASE }}
@@ -37,7 +37,7 @@ export default function Overview({ c }: { c: CaseData }) {
   );
   return (
     <section data-label={c.label} aria-labelledby={`${c.slug}-overview`}>
-      {wrap("only-d", { height: u(1000) }, <>
+      {wrap("only-d sec", { height: u(1000) }, <>
         <p id={`${c.slug}-overview`} style={{ ...at(56, 120), ...mono(12, 6) }}>(01) OVERVIEW</p>
         <Reveal delay={0.35} style={at(56, 170, o.ledeW ?? 1020)}>
           <p style={{ ...t(o.size ?? 46, 1.12, -(o.size ?? 46) * 0.02) }}>{o.lede}</p>

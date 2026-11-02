@@ -30,7 +30,18 @@
   :root { --u: calc(100vw / 834); }
 }
 @media (min-width: 1100px) {
-  :root { --u: calc(min(100vw, 1920px) / 1728); }
+  :root { --u: calc(min(100vw, 2200px) / 1728); }
+}
+/* side gutter: 0 until the design reaches its widest (2200px), then the page centres */
+:root { --gx: 0px; }
+@media (min-width: 2200px) {
+  :root { --gx: calc((100vw - 2200px) / 2); }
+  /* each desktop section sits centred; its background runs out to both edges of the screen */
+  .only-d.sec { width: 2200px; margin-inline: auto; overflow: visible !important; clip-path: inset(0 calc(-1 * var(--gx))); }
+  .only-d.sec::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(-1 * var(--gx)); right: calc(-1 * var(--gx)); background: inherit; z-index: -1; pointer-events: none; }
+  /* full-bleed photos stretch with it */
+  .only-d.sec > .bleed { left: calc(-1 * var(--gx)) !important; width: calc(100% + 2 * var(--gx)) !important; }
+  .wide-frame { max-width: 2200px; margin-inline: auto; }
 }
 
 html { background: var(--bone); overflow-x: hidden; }

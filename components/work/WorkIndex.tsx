@@ -147,7 +147,7 @@ export default function WorkIndex() {
       </p>
 
       {/* desktop */}
-      <div className="only-d" style={{ background: "var(--bone)", padding: `0 ${u(56)} ${u(55)}`, overflow: "hidden" }}>
+      <div className="only-d wide-frame" style={{ background: "var(--bone)", padding: `0 ${u(56)} ${u(55)}`, overflow: "hidden" }}>
         <div style={{ position: "relative", height: u(240) }}>
           <div style={{ position: "absolute", left: 0, top: u(141) }}><Chips f={f} set={setF} bp="d" /></div>
           <p className="mono abs nowrap" style={{ right: 0, top: u(150), ...t(11, 1.4, 0.33), color: "var(--muted-small)" }}>SORT: NEWEST FIRST</p>
