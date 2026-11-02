@@ -13,9 +13,12 @@ export const at = (x: number, y: number, w?: number, h?: number, extra: CSSPrope
   ...extra,
 });
 
+/** reading size: small labels and body copy are set a little larger than the Figma frames, headlines stay as designed */
+export const grow = (size: number) => (size <= 13 ? size * 1.2 : size <= 24 ? size * 1.1 : size);
+
 /** text style: size, line-height (ratio), letter-spacing in design px */
 export const t = (size: number, lh: number | "normal" = "normal", ls = 0, extra: CSSProperties = {}): CSSProperties => ({
-  fontSize: u(size),
+  fontSize: u(grow(size)),
   lineHeight: lh,
   ...(ls ? { letterSpacing: u(ls) } : {}),
   ...extra,

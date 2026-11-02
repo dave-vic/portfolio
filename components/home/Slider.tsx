@@ -159,8 +159,8 @@ export default function Slider() {
         </Fly>
         <Fly i={2} style={at(461, 290, 806.4, 504)}><Front s={s} dir={dir} radius={7} shadow onFlick={go} /></Fly>
         <Reveal delay={1.5} y={14} style={at(554, 874, 620)}><p className="mono" style={{ textAlign: "center", ...t(12, 1.5, 0.24) }}>{s.desc}</p></Reveal>
-        <Reveal delay={1.65} y={14} style={at(660, 938)}><p className="mono" style={{ ...t(11, 1.4, 0.33), whiteSpace: "pre" }}>{s.stats.map(([a, b]) => `${a} ${b}`).join("      ·      ")}</p></Reveal>
-        <Link href="/work" className="mono abs pre" style={{ ...at(802, 972), ...t(11, 1.4, 0.33), color: "var(--laterite)" }}>{`SEE ALL WORK  →`}</Link>
+        <Reveal delay={1.65} y={14} style={at(660, 956)}><p className="mono" style={{ ...t(11, 1.4, 0.33), whiteSpace: "pre" }}>{s.stats.map(([a, b]) => `${a} ${b}`).join("      ·      ")}</p></Reveal>
+        <Link href="/work" className="mono abs pre" style={{ ...at(802, 992), ...t(11, 1.4, 0.33), color: "var(--laterite)" }}>{`SEE ALL WORK  →`}</Link>
         <div className="mono abs" style={{ ...at(56, 1053), display: "flex", gap: u(48), ...t(12, "normal", 0.24) }}>
           <button onClick={() => go(-1)} aria-label="Previous project" className="pre">{`←  PREV`}</button>
           <button onClick={() => go(1)} aria-label="Next project" className="pre">{`NEXT  →`}</button>

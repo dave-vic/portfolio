@@ -58,7 +58,7 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
             {labels && (
               <>
                 <span style={{ position: "absolute", left: u(X(p.line[0])), top: u(Y(p.line[1])), width: u(60), height: 1, background: "var(--ink-2)" }} />
-                <span className="mono nowrap" style={{ position: "absolute", left: u(X(p.lx)), top: u(Y(p.ly)), background: "var(--bone)", border: "1px solid var(--ink-2)", borderRadius: 99, padding: `${u(5)} ${u(12)}`, ...t(11, 1.2, 0.22) }}>{p.label}</span>
+                <span className="mono nowrap" style={{ position: "absolute", left: u(X(p.lx)), top: u(Y(p.ly)), background: "var(--bone)", border: "1px solid var(--ink-2)", borderRadius: 99, padding: `${u(5)} ${u(12)}`, fontSize: u(11), lineHeight: 1.2, letterSpacing: u(0.22) }}>{p.label}</span>
               </>
             )}
           </motion.div>

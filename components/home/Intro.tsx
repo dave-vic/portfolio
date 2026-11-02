@@ -72,12 +72,12 @@ export default function Intro() {
         return (
           <div key={bp} className={T ? "only-t" : "only-m"} style={{ background: "var(--ink)", padding: u(10) }}>
             <div style={{ display: "grid", gridTemplateColumns: T ? "1fr 1fr" : "1fr", gap: u(8) }}>
-              <Slide from="l" style={{ ...card(T ? 380 : 179), background: "var(--bone)", padding: u(26), display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <Slide from="l" style={{ ...card(T ? 380 : 204), background: "var(--bone)", padding: u(26), display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: u(18) }}>
                   <img loading="lazy" decoding="async" src="/home/mark.svg" alt="" style={{ width: u(64), height: u(64) }} />
                   <Name size={T ? 34 : 30} />
                 </div>
-                <p className="mono pre" style={{ ...t(11, 1.5, 0.33) }}>{`ROLE :    Product design · PM · Analysis · BD · AI\nBASED :   Accra, Ghana`}</p>
+                <p className="mono pre" style={{ ...t(11, 1.5, 0.33) }}>{`ROLE :    Product design · PM\n          Analysis · BD · AI\nBASED :   Accra, Ghana`}</p>
               </Slide>
               <Slide from="r" delay={0.1} style={{ ...card(T ? 380 : 300) }}>
                 <img loading="lazy" decoding="async" src="/home/intro-photo.jpg" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "30% 30%" }} />
