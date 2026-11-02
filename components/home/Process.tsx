@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import Reveal from "@/components/Reveal";
+import Blur from "@/components/Blur";
 import { at, t, u } from "@/lib/u";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
@@ -19,7 +20,7 @@ function Bar({ i, style, children }: { i: number; style: React.CSSProperties; ch
       <motion.div
         style={{ position: "absolute", inset: 0, background: "#fff", overflow: "hidden" }}
         variants={{ hide: { y: "100%" }, show: { y: 0 } }}
-        transition={{ duration: 1.2, ease: EASE, delay: i * 0.15 }}
+        transition={{ duration: 1.2, ease: EASE, delay: 0.5 + i * 0.18 }}
       >
         {children}
       </motion.div>
@@ -31,13 +32,13 @@ export default function Process() {
   return (
     <section data-label="(05) PROCESS" aria-labelledby="process" style={{ color: "var(--on-dark)" }}>
       <div className="only-d sec" style={{ height: u(1300), background: "var(--ink)" }}>
-        <Reveal style={at(56, 130)}>
+        <Blur as="div" style={at(56, 130)}>
           <h2 id="process" className="anton" style={{ ...t(72, 1), fontWeight: 400, margin: 0, whiteSpace: "nowrap" }}>HOW A PRODUCT<br />MOVES THROUGH ME</h2>
-        </Reveal>
-        <p className="abs" style={{ ...at(56, 290, 340), ...t(16, 1.5), color: "var(--muted)" }}>{LEDE}</p>
+        </Blur>
+        <Reveal delay={0.4} y={16} style={at(56, 290, 340)}><p style={{ ...t(16, 1.5), color: "var(--muted)" }}>{LEDE}</p></Reveal>
         {STAGES.map((s, i) => (
           <div key={s.n}>
-            <Reveal delay={0.2 + i * 0.15} y={20} style={at(s.d.x, s.d.noteY, 240)}><p style={{ ...t(14, 1.45) }}>{s.note}</p></Reveal>
+            <Reveal delay={1.3 + i * 0.15} y={20} style={at(s.d.x, s.d.noteY, 240)}><p style={{ ...t(14, 1.45) }}>{s.note}</p></Reveal>
             <Bar i={i} style={at(s.d.x, s.d.y, s.d.w, s.d.h)}>
               <p className="anton" style={{ position: "absolute", left: u(16), top: u(14), ...t(22), color: "var(--ink)" }}>{s.name}</p>
               <p className="anton" aria-hidden style={{ position: "absolute", left: u(s.d.nx), top: u(s.d.ny), ...t(s.d.size, 0.8), color: "var(--ink)" }}>{s.n}</p>
@@ -53,7 +54,7 @@ export default function Process() {
         return (
           <div key={bp} className={T ? "only-t" : "only-m"} style={{ background: "var(--ink)", padding: `${u(T ? 104 : 72)} ${u(T ? 40 : 20)}` }}>
             <p className="mono" style={{ ...t(11, 1.5, 0.33), color: "var(--muted)" }}>(05) PROCESS</p>
-            <h2 className="anton" style={{ ...t(T ? 56 : 40, 1), fontWeight: 400, margin: `${u(24)} 0 0` }}>HOW A PRODUCT<br />MOVES THROUGH ME</h2>
+            <Blur as="div"><h2 className="anton" style={{ ...t(T ? 56 : 40, 1), fontWeight: 400, margin: `${u(24)} 0 0` }}>HOW A PRODUCT<br />MOVES THROUGH ME</h2></Blur>
             <p style={{ ...t(T ? 17 : 16, 1.45), color: "var(--muted)", marginTop: u(24) }}>{LEDE}</p>
             <div style={{ display: "flex", alignItems: "flex-end", gap: u(gap), height: u(Math.max(...bh)), marginTop: u(24) }}>
               {STAGES.map((s, i) => (

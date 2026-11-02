@@ -47,7 +47,9 @@ const M: Layout = {
   tags: [{ x: 20, y: 358, a: TAGS.th[0], b: TAGS.th[1] }, { x: 250, y: 294, a: TAGS.hr[0], b: TAGS.hr[1] }, { x: 150, y: 550, a: TAGS.cl[0], b: TAGS.cl[1] }],
 };
 
-const FROM = { top: { y: "-22%", x: 0 }, bottom: { y: "22%", x: 0 }, left: { x: "-40%", y: 0 }, right: { x: "40%", y: 0 } };
+// screens drop in from above the frame, turning as they fall, then land (Figma motion)
+const FROM = { top: { y: "-130%", x: 0 }, bottom: { y: "60%", x: 0 }, left: { x: "-120%", y: 0 }, right: { x: "120%", y: 0 } };
+const TURN = [-9, 7, -6, 8, -7];
 
 function Header({ L, cls }: { L: Layout; cls: string }) {
   const o = L.off;
@@ -57,8 +59,8 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
       {/* giant WORK */}
       <motion.p className="anton abs nowrap" aria-hidden
         style={{ ...at(L.work.x, L.work.y + o), ...t(L.work.size, 1, L.work.ls), color: "var(--laterite)", margin: 0 }}
-        initial={{ opacity: 0, y: u(60) }} animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: EASE }}>WORK</motion.p>
+        initial={{ opacity: 0, x: u(L.W * 0.45), color: "#e6cbbd" }} animate={{ opacity: 1, x: 0, color: "#a93f15" }}
+        transition={{ opacity: { duration: 0.5 }, x: { duration: 1.3, ease: EASE }, color: { duration: 1, delay: 0.5 } }}>WORK</motion.p>
 
       {/* tiles slide / drop in over the word */}
       {L.tiles.map((k, i) => {
@@ -68,8 +70,8 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
         );
         return (
           <motion.div key={k.src + i} style={{ ...at(k.x, k.y + o, k.w, k.h), overflow: "hidden" }}
-            initial={{ opacity: 0, ...FROM[k.from] }} animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 1, ease: EASE, delay: 0.35 + i * 0.12 }}>
+            initial={{ opacity: 0, rotate: TURN[i % TURN.length], ...FROM[k.from] }} animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+            transition={{ duration: 1.2, ease: EASE, delay: 0.9 + i * 0.14 }}>
             {k.href ? <Link href={k.href} aria-label={k.label} style={{ display: "block", width: "100%", height: "100%", position: "relative" }}>{inner}</Link> : inner}
           </motion.div>
         );
@@ -79,7 +81,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
         <motion.div key={g.a} className="mono abs" aria-hidden
           style={{ ...at(g.x, g.y + o), background: "var(--bone)", padding: `${u(L.padY)} ${u(L.padX)}`, color: "var(--laterite)", whiteSpace: "pre", ...mono(L.tagSize, L.tagSize * 0.03) }}
           initial={{ opacity: 0, y: u(12) }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 1 + i * 0.1 }}>
+          transition={{ duration: 0.7, ease: EASE, delay: 1.9 + i * 0.1 }}>
           {g.a}<br />{g.b}
         </motion.div>
       ))}

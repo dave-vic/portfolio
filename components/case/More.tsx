@@ -13,7 +13,7 @@ export default function More({ c }: { c: CaseData }) {
   const badgeText = (d: number) => ({ ...t(d >= 90 ? 48 : 42, 1), color: c.colors.accentInk });
   return (
     <section data-label={c.label} aria-labelledby={`${c.slug}-more`} style={{ color: "#fff" }}>
-      <motion.div className="only-d sec" style={{ height: u(m.height ?? 1500), background: c.colors.dark }} initial="stack" whileInView="fan" viewport={{ once: true, amount: 0.3 }}>
+      <motion.div data-noauto className="only-d sec" style={{ height: u(m.height ?? 1500), background: c.colors.dark }} initial="stack" whileInView="fan" viewport={{ once: true, amount: 0.3 }}>
         <Drift dist={110} style={{ position: "absolute", left: 0, right: 0, top: u(380), textAlign: "center" }}>
           <p className="anton" aria-hidden style={{ ...t(460, 0.85), color: c.colors.accent, whiteSpace: "nowrap" }}>{m.word}</p>
         </Drift>

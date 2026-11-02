@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
+import Reveal from "@/components/Reveal";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
 // desktop cards: image (curved card art from Figma) and caption positions
@@ -44,11 +45,11 @@ export default function LabGallery() {
       <div className="only-d sec" style={{ height: u(1117), background: "var(--bone)" }}>
         {CARDS.map((c, i) => (
           <motion.div key={c.img}
-            initial={{ opacity: 0, y: 70, rotateY: (3 - i) * -14 }}
-            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+            initial={{ opacity: 0, x: u(180), rotateY: -55 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-            transition={{ duration: 1, ease: EASE, delay: Math.abs(3 - i) * 0.08 }}
-            style={{ position: "absolute", inset: 0, pointerEvents: "none", perspective: 1200 }}
+            transition={{ duration: 1.1, ease: EASE, delay: 0.15 + i * 0.16 }}
+            style={{ position: "absolute", inset: 0, pointerEvents: "none", transformPerspective: 1600, transformOrigin: `${u(c.x + c.w / 2)} ${u(c.y + c.h / 2)}` }}
           >
             <img loading="lazy" decoding="async" src={`/home/${c.img}`} alt="" style={at(c.x, c.y, c.w, c.h)} />
             {c.label && <p className="pixel abs" style={{ ...at(c.label.x, c.label.y), ...t(56, 1), color: c.label.c }}>{c.label.t}</p>}
@@ -57,13 +58,13 @@ export default function LabGallery() {
           </motion.div>
         ))}
         <motion.h2 id="lab" className="sans abs"
-          initial={{ y: 120, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
-          transition={{ duration: 1.1, ease: EASE, delay: 0.3 }}
+          initial={{ y: 120, opacity: 0, filter: "blur(16px)" }} whileInView={{ y: 0, opacity: 1, filter: "blur(0px)" }} viewport={{ once: true }}
+          transition={{ duration: 1.1, ease: EASE, delay: 0.35 }}
           style={{ ...at(40, 835), ...t(340, 0.8, -20.4), fontWeight: 500, margin: 0 }}>Lab</motion.h2>
-        <div style={{ ...at(1462, 887, 210, 44) }}><Corner href="/lab">SEE ALL EXPERIMENTS</Corner></div>
-        <p className="abs" style={{ ...at(1672, 977, 460), transform: "translateX(-100%)", textAlign: "right", ...t(20, 1.4, -0.1) }}>
-          AI products I designed and built myself, and the AI workflows I use in client work.
-        </p>
+        <Reveal delay={1.4} y={16} style={{ ...at(1462, 887, 210, 44) }}><Corner href="/lab">SEE ALL EXPERIMENTS</Corner></Reveal>
+        <Reveal delay={1.2} y={16} style={{ ...at(1212, 977, 460), textAlign: "right" }}>
+          <p style={{ ...t(20, 1.4, -0.1) }}>AI products I designed and built myself, and the AI workflows I use in client work.</p>
+        </Reveal>
       </div>
 
       {(["t", "m"] as const).map((bp) => {
@@ -75,14 +76,16 @@ export default function LabGallery() {
             <div style={{ overflowX: "auto", marginTop: u(T ? 36 : 28), scrollSnapType: "x mandatory", scrollbarWidth: "none" }}>
               <div style={{ display: "flex", alignItems: "center", gap: u(gap), padding: `0 ${u(T ? 40 : 20)}`, width: "max-content", height: u(T ? 322 : 248) }}>
                 {FLAT.map((c, i) => (
-                  <div key={c.cap} style={{ width: u(w), scrollSnapAlign: "start" }}>
+                  <motion.div key={c.cap} style={{ width: u(w), scrollSnapAlign: "start", transformPerspective: 1200 }}
+                    initial={{ opacity: 0, x: u(120), rotateY: -45 }} whileInView={{ opacity: 1, x: 0, rotateY: 0 }} viewport={{ once: true }}
+                    transition={{ duration: 1, ease: EASE, delay: 0.1 + i * 0.12 }}>
                     <div style={{ height: u(hs[i]), borderRadius: u(14), overflow: "hidden", background: "bg" in c ? c.bg : undefined, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {c.kind === "img" && <img loading="lazy" decoding="async" src={`/home/${c.src}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
                       {c.kind === "txt" && <span className="pixel" style={{ ...t(T ? 52 : 40, 1), color: c.c }}>{c.t}</span>}
                       {c.kind === "blank" && <span className="mono" style={{ ...t(11, 1.5, 0.33), color: "var(--muted-small)" }}>{c.t}</span>}
                     </div>
                     <p className="mono pre" style={{ ...t(10, 1.5, 0.3), marginTop: u(10), color: "hot" in c && c.hot ? "var(--laterite)" : "var(--ink)" }}>{c.cap}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

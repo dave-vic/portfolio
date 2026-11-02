@@ -91,8 +91,8 @@ export default function Hero({ c }: { c: CaseData }) {
     <section data-label={c.label} aria-label={`${h.w1} ${h.w2}`}>
       {/* desktop 1728 × 1117 */}
       <div className="only-d sec" style={{ height: u(1117), background: "var(--bone)" }} onMouseMove={onMove} onMouseLeave={onLeave}>
-        <DriftTop dist={-90} style={at(40, 95)}><h1 className="anton" style={big}>{h.w1}</h1></DriftTop>
-        <DriftTop dist={90} style={{ position: "absolute", right: u(40), top: u(770) }}><p className="anton" aria-hidden style={big}>{h.w2}</p></DriftTop>
+        <DriftTop enter dist={-90} style={at(40, 95)}><h1 className="anton" style={big}>{h.w1}</h1></DriftTop>
+        <DriftTop enter dist={90} style={{ position: "absolute", right: u(40), top: u(770) }}><p className="anton" aria-hidden style={big}>{h.w2}</p></DriftTop>
         {order.map((i) => <Card key={i} s={h.cards[i]} i={i} mx={sx} my={sy} depth={depth[i]} />)}
         <Sticker c={c} size={15} box={at(...(h.stickerAt ?? [1180, 760]), 170, 170)} />
         {h.meta.map(([k, v], i) => (
@@ -111,12 +111,12 @@ export default function Hero({ c }: { c: CaseData }) {
         return (
           <div key={bp} className={T ? "only-t" : "only-m"} style={{ background: "var(--bone)", padding: `${u(T ? 66 + 40 : 71 + 32)} ${u(T ? 40 : 20)} ${u(T ? 96 : 64)}`, overflow: "hidden" }} onMouseMove={onMove} onMouseLeave={onLeave}>
             <p style={mono(11, 0, 1.4)}>{c.label}</p>
-            <h1 className="anton" style={{ ...word(s1), marginTop: u(14) }}>{h.w1}</h1>
+            <motion.h1 className="anton" style={{ ...word(s1), marginTop: u(14) }} initial={{ x: u(-260), opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1.2, ease: EASE, delay: 0.1 }}>{h.w1}</motion.h1>
             <div style={{ position: "relative", height: u(T ? 498 : 281), marginTop: u(14) }}>
               {order.map((i) => <Card key={i} s={col.cards[i]} i={i} mx={sx} my={sy} depth={depth[i] * 0.4} flow />)}
               <Sticker c={c} size={T ? 11 : 8} box={at(col.sticker[0], col.sticker[1], col.sticker[2], col.sticker[2])} tilt={12} />
             </div>
-            <p className="anton" aria-hidden style={{ ...word(s2), marginTop: u(14), textAlign: "right" }}>{h.w2}</p>
+            <motion.p className="anton" aria-hidden style={{ ...word(s2), marginTop: u(14), textAlign: "right" }} initial={{ x: u(260), opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1.2, ease: EASE, delay: 0.25 }}>{h.w2}</motion.p>
             <div style={{ display: "flex", flexDirection: T ? "row" : "column", gap: u(T ? 32 : 12), marginTop: u(14) }}>
               {h.meta.map(([k, v]) => <p key={k} style={mono(11, 4, 1.4)}>{k}<br />{v}</p>)}
             </div>

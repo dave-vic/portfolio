@@ -26,7 +26,11 @@ export const viewport: Viewport = { themeColor: "#eeebe4" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* the loader plays once per visit; later page loads skip it before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(sessionStorage.getItem("dd-intro"))document.documentElement.dataset.intro="seen"}catch(e){}` }} />
+      </head>
       <body>
         <MotionRoot>
           <SmoothScroll />

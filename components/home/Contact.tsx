@@ -14,8 +14,8 @@ function Letters({ text, style, delay = 0 }: { text: string; style: React.CSSPro
     <span aria-label={text} style={{ display: "inline-flex", overflow: "hidden", ...style }}>
       {[...text].map((c, i) => (
         <motion.span key={i} aria-hidden style={{ display: "inline-block" }}
-          initial={{ y: "70%", opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: EASE, delay: delay + i * 0.05 }}>{c}</motion.span>
+          initial={{ opacity: 0, filter: "blur(16px)" }} whileInView={{ opacity: 1, filter: "blur(0px)" }} viewport={{ once: true }}
+          transition={{ duration: 1, ease: EASE, delay: 0.4 + delay + i * 0.06 }}>{c}</motion.span>
       ))}
     </span>
   );
@@ -62,14 +62,15 @@ export default function Contact() {
     <section id="contact" data-label="(08) CONTACT" aria-labelledby="contact-h" style={{ color: "var(--on-dark)", position: "relative" }}>
       <h2 id="contact-h" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)" }}>Contact</h2>
       <div className="only-d sec" style={{ height: u(1117) }}>
-        <img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }} />
+        <motion.img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }}
+          initial={{ scale: 1.12, opacity: 0.6 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.6, ease: EASE }} />
         {[["OPEN TO", "REMOTE ROLES WORLDWIDE", 56], ["BASED IN", "ACCRA, GHANA · GMT", 486], ["COPYRIGHT", "© 2026 DAVIDA DZATO", 916], ["WORKING ACROSS", "PRODUCT DESIGN · RESEARCH · AI", 1346]].map(([a, b, x]) => (
           <p key={a as string} className="mono abs" style={{ ...at(x as number, 40), ...t(11, 1.4, 0.22) }}>{a}<br />{b}</p>
         ))}
         <Letters text="LET’S" style={{ ...at(56, 280), ...t(240, 0.9, -14.4), fontWeight: 500 }} />
         <Letters text="BUILD" delay={0.15} style={{ ...at(1012, 280), ...t(240, 0.9, -14.4), fontWeight: 500 }} />
-        <p className="serif abs" style={{ ...at(62, 500), ...t(24) }}>Hire me</p>
-        <p className="serif abs" style={{ ...at(1028, 500), ...t(24) }}>Connect online</p>
+        <motion.p className="serif abs" style={{ ...at(62, 500), ...t(24) }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Hire me</motion.p>
+        <motion.p className="serif abs" style={{ ...at(1028, 500), ...t(24) }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Connect online</motion.p>
         <p className="abs" style={{ ...at(1638, 236), ...t(40) }}>®</p>
         <p className="mono abs" style={{ ...at(1672, 640), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.5, 0.24) }}>EMAIL:<br /><a href={`mailto:${EMAIL}`}>{EMAIL.toUpperCase()}</a></p>
         <p className="mono abs" style={{ ...at(1672, 740), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.5, 0.24) }}>SOCIAL:<br /><a href={LI} target="_blank" rel="noopener">LINKEDIN</a><br /><a href={GH} target="_blank" rel="noopener">GITHUB</a></p>
@@ -77,10 +78,10 @@ export default function Contact() {
         <p className="mono abs" style={{ ...at(56, 1069), ...t(12, "normal", 0.24) }}>DAVIDA DZATO</p>
         <button onClick={toTop} className="mono abs" style={{ ...at(816, 1069), ...t(12, "normal", 0.24), color: "var(--on-dark)" }}>(BACK TO TOP)</button>
         <p className="mono abs pre" style={{ ...at(1508, 1069), ...t(12, "normal", 0.24) }}><Link href="/work">WORK</Link>{"    "}<Link href="/about">ABOUT</Link>{"    "}<Link href="/">INDEX</Link></p>
-        <motion.div style={{ ...at(0, 800, 620) }}
-          initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
-          transition={{ duration: 1, ease: EASE, delay: 0.4 }}>
-          <Form cols pad={32} width={620} />
+        <motion.div style={{ ...at(0, 800, 620) }} initial="hide" whileInView="show" viewport={{ once: true }}>
+          <motion.div variants={{ hide: { y: u(360) }, show: { y: 0 } }} transition={{ duration: 1.1, ease: EASE, delay: 1.4 }}>
+            <Form cols pad={32} width={620} />
+          </motion.div>
         </motion.div>
       </div>
 

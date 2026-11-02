@@ -1,6 +1,7 @@
 "use client";
 import { at, t, u } from "@/lib/u";
 import Reveal from "@/components/Reveal";
+import Blur from "@/components/Blur";
 import { StaggerGroup, StaggerItem } from "./Stagger";
 
 const STEPS = [
@@ -27,9 +28,9 @@ export default function HowIWork() {
         <Reveal y={30} style={at(56, 170)}>
           <p className="mono" style={{ ...t(11, 1.4, 0.33), color: "var(--muted)" }}>(03) HOW I WORK</p>
         </Reveal>
-        <Reveal y={50} delay={0.05} style={at(56, 200)}>
+        <Blur as="div" y={20} delay={0.05} style={at(56, 200)}>
           <h2 id="how-h" className="sans nowrap" style={{ ...t(64, 1.4, -1.92), fontWeight: 400, margin: 0 }}>Four things I always do.</h2>
-        </Reveal>
+        </Blur>
         <StaggerGroup style={{ position: "absolute", inset: 0 }} gap={0.12} amount={0.3}>
           {STEPS.map((s, i) => (
             <div key={s.n} style={at(56 + i * 412, 460, 380)}>

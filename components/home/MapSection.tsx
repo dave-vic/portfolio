@@ -29,14 +29,15 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
   const X = (x: number) => (x - BOX.x) * k, Y = (y: number) => (y - BOX.y) * k;
   return (
     <div style={{ position: "relative", width: u(W), height: u(H) }}>
-      <img loading="lazy" decoding="async" src="/home/points-faint.svg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
+      <motion.img loading="lazy" decoding="async" src="/home/points-faint.svg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.2 }} />
       <motion.img
         src="/home/points-ghana.svg" alt="Map of Ghana drawn in points"
         style={{ position: "absolute", left: u(X(1013.5)), top: u(Y(170.25)), width: u(590.3 * k), height: u(853.4 * k) }}
-        initial={{ clipPath: "inset(100% 0 0 0)" }}
-        whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+        initial={{ opacity: 0, scale: 0.94, filter: "blur(6px)" }}
+        whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-        transition={{ duration: 1.8, ease: EASE }}
+        transition={{ duration: 1.6, ease: EASE, delay: 0.1 }}
       />
       {MARKS.map(([x, y], i) => (
         <span key={i} className="mono" style={{ position: "absolute", left: u(X(x)), top: u(Y(y)), ...t(10 * Math.max(k, 0.7), 1) }}>+</span>
@@ -45,10 +46,10 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
         const cx = X(p.r[0] + 14), cy = Y(p.r[1] + 14);
         return (
           <motion.div key={p.label}
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.3 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.9 + i * 0.15 }}
+            transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 1.4 + i * 0.18 }}
             style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", pointerEvents: "none", transformOrigin: `${u(cx)} ${u(cy)}` }}
           >
             <img loading="lazy" decoding="async" src="/home/pin-ring.svg" alt="" style={{ position: "absolute", left: u(cx - ring / 2), top: u(cy - ring / 2), width: u(ring), height: u(ring) }} />
@@ -80,11 +81,12 @@ export default function MapSection() {
     <section data-label="(03) WHERE THE WORK LIVES" aria-labelledby="where">
       <div className="only-d sec" style={{ height: u(1117), background: "var(--bone)" }}>
         <p className="mono abs" style={{ ...at(56, 200), ...t(12, 1.4, 0.24) }}>(01)<br />WHERE THE WORK LIVES</p>
-        <Reveal style={at(56, 290, 700)}>
+        <motion.div style={at(56, 290, 700)} initial={{ opacity: 0, y: 30, color: "#a9a7a2" }} whileInView={{ opacity: 1, y: 0, color: "#141414" }}
+          viewport={{ once: true, margin: "0px 0px -10% 0px" }} transition={{ opacity: { duration: 0.8 }, y: { duration: 0.9, ease: EASE }, color: { duration: 1.2, delay: 0.7 } }}>
           <h2 id="where" style={{ ...t(64, 1.02, -1.92), fontWeight: 400, margin: 0 }}>Products used from a court registry in Accra to a feature phone in Tamale.</h2>
-        </Reveal>
+        </motion.div>
         {PLACES.map(([n, a, b], i) => (
-          <Reveal key={n} delay={0.05 * i} y={16} style={at(56, 560 + i * 64)}><Place n={n} a={a} b={b} /></Reveal>
+          <Reveal key={n} delay={0.9 + 0.1 * i} y={16} style={at(56, 560 + i * 64)}><Place n={n} a={a} b={b} /></Reveal>
         ))}
         <p className="mono abs" style={{ ...at(56, 1037), ...t(16, 1.4, 0.32) }}>+</p>
         <p className="mono abs pre" style={{ ...at(90, 1039), ...t(12, 1.4, 0.24), color: "var(--muted-small)" }}>{`05°33′N   0°12′W   ·   DRAWN FROM 3,500 POINTS`}</p>

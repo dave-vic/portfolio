@@ -1,7 +1,7 @@
 "use client";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useRef } from "react";
+import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
+import Reveal from "@/components/Reveal";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
 const LI = "https://www.linkedin.com/in/davida-dzato-b870021a0/";
@@ -14,30 +14,30 @@ const TOKENS: Tok[] = [
 ];
 const SUB = "Based in Accra, working remotely with product teams anywhere. I stay close to the work from the first conversation to the final screen.";
 
-function Word({ tok, i, n, p, pill }: { tok: Tok; i: number; n: number; p: MotionValue<number>; pill: [number, number] }) {
-  // each word brightens as the reader scrolls past it
-  const start = i / n, end = (i + 1) / n;
-  const o = useTransform(p, [start, end], [0.28, 1]);
+/** each word comes into focus in turn; the photo pills pop open between them (Figma motion) */
+function Word({ tok, i, pill }: { tok: Tok; i: number; pill: [number, number] }) {
+  const tr = { duration: 0.9, ease: EASE, delay: 0.1 + i * 0.11 };
   if ("pill" in tok) {
     const [w, h, l, tp] = tok.pill;
     return (
-      <motion.span style={{ opacity: o, display: "inline-block", width: u(pill[0]), height: u(pill[1]), borderRadius: u(pill[1] / 2), overflow: "hidden", position: "relative", flex: "none" }}>
+      <motion.span variants={{ hide: { opacity: 0, scale: 0.4 }, show: { opacity: 1, scale: 1 } }} transition={{ ...tr, ease: [0.34, 1.56, 0.64, 1] }}
+        style={{ display: "inline-block", width: u(pill[0]), height: u(pill[1]), borderRadius: u(pill[1] / 2), overflow: "hidden", position: "relative", flex: "none" }}>
         <img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", width: `${w}%`, height: `${h}%`, left: `${l}%`, top: `${tp}%` }} />
       </motion.span>
     );
   }
-  return <motion.span style={{ opacity: o, color: tok.dim ? "var(--muted)" : "var(--on-dark)", whiteSpace: "nowrap" }}>{tok.w}</motion.span>;
+  return (
+    <motion.span variants={{ hide: { opacity: 0, filter: "blur(14px)" }, show: { opacity: 1, filter: "blur(0px)" } }} transition={tr}
+      style={{ color: tok.dim ? "var(--muted)" : "var(--on-dark)", whiteSpace: "nowrap", display: "inline-block" }}>{tok.w}</motion.span>
+  );
 }
 
 function Sentence({ size, ls, gap, pill, width }: { size: number; ls: number; gap: [number, number]; pill: [number, number]; width: number }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 45%"] });
-  const p = useTransform(scrollYProgress, (v) => (reduce ? 1 : v));
   return (
-    <p ref={ref} className="sans" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", alignContent: "center", rowGap: u(gap[0]), columnGap: u(gap[1]), width: u(width), ...t(size, 1.1, ls) }}>
-      {TOKENS.map((tok, i) => <Word key={i} tok={tok} i={i} n={TOKENS.length} p={p} pill={pill} />)}
-    </p>
+    <motion.p initial="hide" whileInView="show" viewport={{ once: true, margin: "0px 0px -20% 0px" }} className="sans"
+      style={{ display: "flex", flexWrap: "wrap", alignItems: "center", alignContent: "center", rowGap: u(gap[0]), columnGap: u(gap[1]), width: u(width), ...t(size, 1.1, ls) }}>
+      {TOKENS.map((tok, i) => <Word key={i} tok={tok} i={i} pill={pill} />)}
+    </motion.p>
   );
 }
 
@@ -48,7 +48,7 @@ function Signature({ w, h }: { w: number; h: number }) {
       initial={{ clipPath: "inset(0 100% 0 0)" }}
       whileInView={{ clipPath: "inset(0 0% 0 0)" }}
       viewport={{ once: true }}
-      transition={{ duration: 2.2, ease: EASE, delay: 0.3 }}
+      transition={{ duration: 2.2, ease: EASE, delay: 1.2 }}
     >
       <img loading="lazy" decoding="async" src="/home/signature.svg" alt="" style={{ width: "100%", height: "100%" }} />
     </motion.div>
@@ -70,10 +70,10 @@ export default function Statement() {
       <div className="only-d sec" style={{ height: u(1117), background: "var(--night)" }}>
         <p className="mono abs" style={{ ...at(220, 210), ...t(12, 1.4, 0.24), color: "var(--muted)" }}>(07) ABOUT</p>
         <div style={at(220, 260)}><Sentence size={76} ls={-2.28} gap={[14, 20]} pill={[170, 88]} width={1290} /></div>
-        <p className="abs" style={{ ...at(220, 787, 460), ...t(17, 1.5), color: "var(--muted)" }}>{SUB}</p>
+        <Reveal delay={0.9} y={20} style={at(220, 787, 460)}><p style={{ ...t(17, 1.5), color: "var(--muted)" }}>{SUB}</p></Reveal>
         <div style={at(1201.37, 835.35)}><Signature w={432.3} h={96.07} /></div>
         <p className="mono abs" style={{ ...at(1672, 967), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.4, 0.24) }}>DAVIDA DZATO<br />PRODUCT DESIGNER</p>
-        <div style={at(220, 947)}><LinkedIn /></div>
+        <Reveal delay={1.1} y={20} style={at(220, 947)}><LinkedIn /></Reveal>
       </div>
 
       {(["t", "m"] as const).map((bp) => {

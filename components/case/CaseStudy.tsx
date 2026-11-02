@@ -9,11 +9,13 @@ import More from "./More";
 import Outcome from "./Outcome";
 import Next from "./Next";
 import Motion from "./Motion";
+import AutoMotion from "./AutoMotion";
 
 /** the shared case-study template: each section renders only when the case has it */
 export default function CaseStudy({ c }: { c: CaseData }) {
   return (
     <Motion>
+      <AutoMotion>
       <Hero c={c} />
       <Overview c={c} />
       {c.problem && <Problem c={c} />}
@@ -23,6 +25,7 @@ export default function CaseStudy({ c }: { c: CaseData }) {
       <More c={c} />
       {c.outcome && <Outcome c={c} />}
       <Next c={c} />
+      </AutoMotion>
     </Motion>
   );
 }

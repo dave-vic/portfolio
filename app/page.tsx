@@ -1,3 +1,4 @@
+import Loader from "@/components/home/Loader";
 import Hero from "@/components/home/Hero";
 import Intro from "@/components/home/Intro";
 import MapSection from "@/components/home/MapSection";
@@ -10,6 +11,7 @@ import Contact from "@/components/home/Contact";
 export default function Home() {
   return (
     <main>
+      <Loader />
       <Hero />
       <Intro />
       <MapSection />

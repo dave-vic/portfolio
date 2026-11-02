@@ -100,13 +100,19 @@ export function Drift({ children, dist = 120, style, className }: { children: Re
 }
 
 /** drift that starts at rest (for the first section on the page) */
-export function DriftTop({ children, dist = 120, style, className }: { children: ReactNode; dist?: number; style?: CSSProperties; className?: string }) {
+export function DriftTop({ children, dist = 120, style, className, enter }: { children: ReactNode; dist?: number; style?: CSSProperties; className?: string; enter?: boolean }) {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const x = useTransform(scrollY, [0, 1100], [0, dist], { clamp: true });
   return (
     <motion.div className={className} style={{ ...style, x: reduce ? 0 : x }}>
-      {children}
+      {enter ? (
+        /* giant words slide in from their own side, then keep drifting with the scroll (Figma motion) */
+        <motion.div initial={{ x: u(dist < 0 ? -420 : 420), opacity: 0 }} animate={{ x: 0, opacity: 1 }}
+          transition={{ x: { duration: 1.3, ease: EASE, delay: 0.1 }, opacity: { duration: 0.6, delay: 0.1 } }}>
+          {children}
+        </motion.div>
+      ) : children}
     </motion.div>
   );
 }

@@ -30,7 +30,7 @@ function Float({ children, style }: { children: React.ReactNode; style?: React.C
 export default function Overview({ c }: { c: CaseData }) {
   const o = c.overview;
   const wrap = (cls: string, style: React.CSSProperties, children: React.ReactNode) => (
-    <motion.div key={cls} className={cls} style={{ position: "relative", overflow: "hidden", background: c.colors.brand, color: "#fff", ...style }} initial="hide" whileInView="show" viewport={{ once: true, amount: 0.15 }}>
+    <motion.div data-noauto key={cls} className={cls} style={{ position: "relative", overflow: "hidden", background: c.colors.brand, color: "#fff", ...style }} initial="hide" whileInView="show" viewport={{ once: true, amount: 0.15 }}>
       {children}
       <Wipe />
     </motion.div>

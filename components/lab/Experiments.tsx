@@ -1,6 +1,7 @@
 "use client";
 import { at, t, u } from "@/lib/u";
 import Reveal from "@/components/Reveal";
+import Blur from "@/components/Blur";
 import { StaggerGroup, StaggerItem } from "@/components/about/Stagger";
 
 type Exp = {
@@ -69,9 +70,9 @@ export default function Experiments() {
       {/* desktop */}
       <div className="only-d sec" style={{ height: u(2120), background: "var(--bone)" }}>
         <Reveal y={30} style={at(56, 170)}><p className="mono" style={mono("var(--ink)")}>(01) EXPERIMENTS</p></Reveal>
-        <Reveal y={50} delay={0.05} style={at(56, 200)}>
+        <Blur as="div" y={20} delay={0.05} style={at(56, 200)}>
           <h2 id="exp-h" className="sans nowrap" style={{ ...t(64, 1.4, -1.92), fontWeight: 400, margin: 0 }}>Three AI products I built, and an article about it.</h2>
-        </Reveal>
+        </Blur>
         {EXPS.map((e, i) => {
           const y = 360 + i * 420;
           return (

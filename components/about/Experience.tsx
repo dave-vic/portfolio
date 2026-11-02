@@ -1,6 +1,7 @@
 "use client";
 import { at, t, u } from "@/lib/u";
 import Reveal from "@/components/Reveal";
+import Blur from "@/components/Blur";
 import { StaggerGroup, StaggerItem } from "./Stagger";
 
 const CV = "/Davida-Dzato-CV.pdf";
@@ -25,9 +26,9 @@ export default function Experience() {
         <Reveal y={30} style={at(56, 170)}>
           <p className="mono" style={{ ...t(11, 1.4, 0.33) }}>(02) EXPERIENCE</p>
         </Reveal>
-        <Reveal y={50} delay={0.05} style={at(56, 200)}>
+        <Blur as="div" y={20} delay={0.05} style={at(56, 200)}>
           <h2 id="exp-h" className="sans nowrap" style={{ ...t(64, 1.05, -1.92), fontWeight: 400, margin: 0 }}>Where I’ve worked.</h2>
-        </Reveal>
+        </Blur>
         <a href={CV} download className="mono abs pre navlink" style={{ ...at(1575, 230), ...t(11, 1.4, 0.33), color: "var(--laterite)" }}>{`DOWNLOAD CV  ↓`}</a>
 
         <StaggerGroup style={{ position: "absolute", inset: 0 }} gap={0.07} amount={0.2}>
