@@ -77,6 +77,7 @@ export type CaseData = {
     hw?: number;
     word: string;
     wordW: number; // rendered width at 460px
+    height?: number; // desktop section height (default 1500)
     cards: (Shot & { badge: [number, number, number]; cap: string; capAt: [number, number, number] })[];
   };
   outcome?: {
