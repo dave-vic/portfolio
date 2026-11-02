@@ -22,7 +22,7 @@ function Bracket({ w, h }: { w: number; h: number }) {
       animate={{ width: u(w) }}
       transition={{ duration: 1.1, ease: EASE, delay: 0.35 }}
     >
-      <img src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", width: u(w * 2.5), height: u(h * 2.8571), left: u(-w * 1.05), top: u(-h * 1.3857) }} />
+      <img decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", width: u(w * 2.5), height: u(h * 2.8571), left: u(-w * 1.05), top: u(-h * 1.3857) }} />
     </motion.span>
   );
 }
@@ -48,7 +48,7 @@ function Strip({ cols, pad }: { cols: number; pad: "d" | "f" }) {
       {SECTORS.map(([a, b], i) => (
         <div key={a} className="mono" style={pad === "d" ? { padding: `${u(14)} ${u(16)} ${u(14)} ${i ? u(16) : 0}`, borderLeft: i ? "1px solid var(--line)" : "none", display: "grid", gap: u(4) } : { display: "grid", gap: u(4) }}>
           <span style={{ ...t(11, 1.4, 0.33), color: "var(--muted-small)", display: "flex", alignItems: "center", gap: u(8) }}>
-            {i === 0 && <img src="/home/dot-rust.svg" alt="" style={{ width: u(6), height: u(6) }} />}{a}
+            {i === 0 && <img decoding="async" src="/home/dot-rust.svg" alt="" style={{ width: u(6), height: u(6) }} />}{a}
           </span>
           <span style={{ ...t(11, 1.4, 0.33) }}>{b}</span>
         </div>

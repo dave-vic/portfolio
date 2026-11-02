@@ -50,7 +50,7 @@ export default function LabHero() {
             transition={{ duration: 1.1, ease: EASE, delay: 0.15 + Math.abs(3 - i) * 0.09 }}
             style={{ position: "absolute", inset: 0, pointerEvents: "none", perspective: 1200 }}
           >
-            <img src={`/home/${c.img}`} alt="" style={at(c.x, c.y, c.w, c.h)} />
+            <img decoding="async" src={`/home/${c.img}`} alt="" style={at(c.x, c.y, c.w, c.h)} />
             {c.label && <p className="pixel abs" style={{ ...at(c.label.x, c.label.y), ...t(56, 1), color: c.label.c }}>{c.label.t}</p>}
             {c.small && <p className="mono abs" style={{ ...at(c.small.x, c.small.y), ...t(12, 1), color: "var(--muted-small)" }}>{c.small.t}</p>}
             <p className="mono abs pre" style={{ ...at(c.x, c.cy), ...t(11, "normal", 0.22), color: c.hot ? "var(--laterite)" : "var(--ink)" }}>{c.cap}</p>
@@ -77,7 +77,7 @@ export default function LabHero() {
                 {FLAT.map((c, i) => (
                   <StaggerItem key={c.cap} kind="side" style={{ width: u(w), scrollSnapAlign: "start" }}>
                     <div style={{ position: "relative", height: u(hs[i]), borderRadius: u(14), overflow: "hidden", background: "bg" in c ? c.bg : undefined }}>
-                      {c.kind === "img" && <img src={c.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
+                      {c.kind === "img" && <img decoding="async" src={c.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
                       {c.kind === "txt" && <span className="pixel" style={{ position: "absolute", left: u(T ? c.pos[0] : c.pos[2]), top: u(T ? c.pos[1] : c.pos[3]), ...t(T ? 52 : 40, "normal"), color: c.c }}>{c.t}</span>}
                       {c.kind === "blank" && <span className="mono" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", ...t(11, 1.5, 0.33), color: "var(--muted-small)" }}>{c.t}</span>}
                     </div>

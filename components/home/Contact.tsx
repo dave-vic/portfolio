@@ -62,7 +62,7 @@ export default function Contact() {
     <section id="contact" data-label="(08) CONTACT" aria-labelledby="contact-h" style={{ color: "var(--on-dark)", position: "relative" }}>
       <h2 id="contact-h" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)" }}>Contact</h2>
       <div className="only-d sec" style={{ height: u(1117) }}>
-        <img src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }} />
+        <img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }} />
         {[["OPEN TO", "REMOTE ROLES WORLDWIDE", 56], ["BASED IN", "ACCRA, GHANA · GMT", 486], ["COPYRIGHT", "© 2026 DAVIDA DZATO", 916], ["WORKING ACROSS", "PRODUCT DESIGN · RESEARCH · AI", 1346]].map(([a, b, x]) => (
           <p key={a as string} className="mono abs" style={{ ...at(x as number, 40), ...t(11, 1.4, 0.22) }}>{a}<br />{b}</p>
         ))}
@@ -88,7 +88,7 @@ export default function Contact() {
         const T = bp === "t";
         return (
           <div key={bp} className={T ? "only-t" : "only-m"} style={{ position: "relative", overflow: "hidden", padding: `${u(T ? 88 : 56)} ${u(T ? 40 : 20)} ${u(24)}` }}>
-            <img src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+            <img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             <div style={{ position: "relative" }}>
               <p className="mono" style={t(11, 1.5, 0.33)}>OPEN TO REMOTE ROLES WORLDWIDE<br />BASED IN ACCRA, GHANA · GMT</p>
               <p className="sans" style={{ ...t(T ? 200 : 118, 0.88, T ? -10 : -5.9), fontWeight: 400, marginTop: u(18) }}>

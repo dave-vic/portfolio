@@ -39,7 +39,7 @@ function Front({ s, radius, shadow }: { s: (typeof SLIDES)[number]; radius: numb
         transition={{ duration: 0.8, ease: EASE }}
         style={{ position: "absolute", inset: 0, borderRadius: u(radius), overflow: "hidden", boxShadow: shadow ? `0 ${u(24)} ${u(60)} rgba(0,0,0,.18)` : undefined, background: "#fff" }}
       >
-        <img src={s.img} alt={s.alt} style={{ width: "100%", height: "auto", minHeight: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <img loading="lazy" decoding="async" src={s.img} alt={s.alt} style={{ width: "100%", height: "auto", minHeight: "100%", objectFit: "cover", objectPosition: "top" }} />
       </motion.div>
     </AnimatePresence>
   );
@@ -70,10 +70,10 @@ export default function Slider() {
         <Marquee text={s.name} size={300} ls={-12} top={330} left={-120} />
         {/* stacked cards behind */}
         <div style={{ ...at(464, 236.19, 832.93, 554.59), display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img src="/home/slide-back1.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(-4deg)" }} />
+          <img loading="lazy" decoding="async" src="/home/slide-back1.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(-4deg)" }} />
         </div>
         <div style={{ ...at(437.83, 292, 825.07, 541.18), display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img src="/home/slide-back2.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(3deg)" }} />
+          <img loading="lazy" decoding="async" src="/home/slide-back2.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(3deg)" }} />
         </div>
         <div style={at(461, 290, 806.4, 504)}><Front s={s} radius={7} shadow /></div>
         <p className="mono abs" style={{ ...at(864, 874, 620), transform: "translateX(-50%)", textAlign: "center", ...t(12, 1.5, 0.24) }}>{s.desc}</p>
@@ -99,10 +99,10 @@ export default function Slider() {
             <div style={{ position: "relative", height: u(T ? 563 : 334), marginTop: u(20), marginLeft: u(T ? -40 : -20), marginRight: u(T ? -40 : -20), overflow: "hidden" }}>
               <Marquee text={s.name} size={T ? 190 : 120} ls={T ? -7.6 : -4.8} top={0} left={-10} />
               <div style={{ position: "absolute", left: u(T ? 80 : 28), top: u(T ? 67 : 72), width: u(W), height: u(H), transform: "rotate(4deg)", borderRadius: u(4), overflow: "hidden" }}>
-                <img src="/home/slide-back1.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                <img loading="lazy" decoding="async" src="/home/slide-back1.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
               </div>
               <div style={{ position: "absolute", left: u(T ? 58 : 28), top: u(T ? 114 : 72), width: u(W), height: u(H), transform: "rotate(-3deg)", borderRadius: u(4), overflow: "hidden" }}>
-                <img src="/home/slide-back2.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                <img loading="lazy" decoding="async" src="/home/slide-back2.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
               </div>
               <div style={{ position: "absolute", left: u(T ? 73 : 28), top: u(T ? 114 : 72), width: u(W), height: u(H), transform: "rotate(-1deg)" }}>
                 <Front s={s} radius={T ? 5.85 : 3.25} shadow />

@@ -34,7 +34,7 @@ function Slide({ from, delay = 0, style, children }: { from: "l" | "r"; delay?: 
 }
 
 const Dots = ({ y, x, set }: { y: number; x: number; set: string[] }) => (
-  <>{set.map((s, i) => <img key={i} src={`/home/${s}`} alt="" style={{ ...at(x + i * 22, y, 9, 9) }} />)}</>
+  <>{set.map((s, i) => <img loading="lazy" decoding="async" key={i} src={`/home/${s}`} alt="" style={{ ...at(x + i * 22, y, 9, 9) }} />)}</>
 );
 
 export default function Intro() {
@@ -42,13 +42,13 @@ export default function Intro() {
     <section data-label="(02) INTRO" aria-label="About Davida">
       {/* desktop */}
       <div className="only-d sec" style={{ height: u(1117), background: "var(--ink)" }}>
-        <Slide from="l" style={{ ...at(12, 12, 1006.74, 537) }}><img src="/home/panel-identity.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
-        <Slide from="r" delay={0.1} style={{ ...at(753.49, 12, 962.55, 537) }}><img src="/home/intro-panel.webp" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%" }} /></Slide>
-        <Slide from="l" delay={0.2} style={{ ...at(12, 563, 665.05, 542) }}><img src="/home/panel-gradient.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
-        <Slide from="r" delay={0.3} style={{ ...at(408.73, 563, 1307.25, 542) }}><img src="/home/panel-text.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="l" style={{ ...at(12, 12, 1006.74, 537) }}><img loading="lazy" decoding="async" src="/home/panel-identity.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="r" delay={0.1} style={{ ...at(753.49, 12, 962.55, 537) }}><img loading="lazy" decoding="async" src="/home/intro-panel.webp" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="l" delay={0.2} style={{ ...at(12, 563, 665.05, 542) }}><img loading="lazy" decoding="async" src="/home/panel-gradient.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="r" delay={0.3} style={{ ...at(408.73, 563, 1307.25, 542) }}><img loading="lazy" decoding="async" src="/home/panel-text.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
 
         {[70, 118, 166, 214].map((y) => <p key={y} className="mono abs" style={{ ...at(56, y), ...t(20, 1) }}>+</p>)}
-        <img src="/home/mark.svg" alt="" style={at(150, 70, 100, 100)} />
+        <img loading="lazy" decoding="async" src="/home/mark.svg" alt="" style={at(150, 70, 100, 100)} />
         <div style={at(290, 64)}><Name size={44} /></div>
         <p className="mono abs pre" style={{ ...at(56, 440), ...t(12, 1.7, 0.24) }}>{`ROLE :       Product design · UX/UI · Analysis · AI\nBASED :      Accra, Ghana`}</p>
         <Dots x={1240} y={34} set={["i-e0.svg", "i-e1.svg", "i-e2.svg"]} />
@@ -74,13 +74,13 @@ export default function Intro() {
             <div style={{ display: "grid", gridTemplateColumns: T ? "1fr 1fr" : "1fr", gap: u(8) }}>
               <Slide from="l" style={{ ...card(T ? 380 : 179), background: "var(--bone)", padding: u(26), display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: u(18) }}>
-                  <img src="/home/mark.svg" alt="" style={{ width: u(64), height: u(64) }} />
+                  <img loading="lazy" decoding="async" src="/home/mark.svg" alt="" style={{ width: u(64), height: u(64) }} />
                   <Name size={T ? 34 : 30} />
                 </div>
                 <p className="mono pre" style={{ ...t(11, 1.5, 0.33) }}>{`ROLE :    Product design · UX/UI · Analysis · AI\nBASED :   Accra, Ghana`}</p>
               </Slide>
               <Slide from="r" delay={0.1} style={{ ...card(T ? 380 : 300) }}>
-                <img src="/home/intro-photo.jpg" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "30% 30%" }} />
+                <img loading="lazy" decoding="async" src="/home/intro-photo.jpg" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "30% 30%" }} />
               </Slide>
               <Slide from="l" delay={0.15} style={{ ...card(T ? 380 : 220), background: GRAD, padding: u(26) }}>
                 <div style={{ display: "flex", justifyContent: "space-between", color: "var(--on-dark)", ...t(13, 1.4) }}>

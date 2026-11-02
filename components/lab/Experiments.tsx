@@ -55,7 +55,7 @@ function Cover({ e, radius = 6, mediumSize }: { e: Exp; radius?: number; mediumS
   }
   return (
     <div style={{ width: "100%", height: "100%", borderRadius: u(radius), border: "1px solid #c9c7bd", overflow: "hidden" }}>
-      <img src={e.img} alt={e.alt} className="exp-zoom" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      <img loading="lazy" decoding="async" src={e.img} alt={e.alt} className="exp-zoom" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
     </div>
   );
 }

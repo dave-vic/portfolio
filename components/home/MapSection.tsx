@@ -29,7 +29,7 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
   const X = (x: number) => (x - BOX.x) * k, Y = (y: number) => (y - BOX.y) * k;
   return (
     <div style={{ position: "relative", width: u(W), height: u(H) }}>
-      <img src="/home/points-faint.svg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
+      <img loading="lazy" decoding="async" src="/home/points-faint.svg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
       <motion.img
         src="/home/points-ghana.svg" alt="Map of Ghana drawn in points"
         style={{ position: "absolute", left: u(X(1013.5)), top: u(Y(170.25)), width: u(590.3 * k), height: u(853.4 * k) }}
@@ -51,9 +51,9 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
             transition={{ duration: 0.6, ease: EASE, delay: 0.9 + i * 0.15 }}
             style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", pointerEvents: "none", transformOrigin: `${u(cx)} ${u(cy)}` }}
           >
-            <img src="/home/pin-ring.svg" alt="" style={{ position: "absolute", left: u(cx - ring / 2), top: u(cy - ring / 2), width: u(ring), height: u(ring) }} />
+            <img loading="lazy" decoding="async" src="/home/pin-ring.svg" alt="" style={{ position: "absolute", left: u(cx - ring / 2), top: u(cy - ring / 2), width: u(ring), height: u(ring) }} />
             <span className="ping" style={{ position: "absolute", left: u(cx - ring / 2), top: u(cy - ring / 2), width: u(ring), height: u(ring), borderRadius: "50%", border: "1px solid var(--laterite)" }} />
-            <img src="/home/pin-dot.svg" alt="" style={{ position: "absolute", left: u(cx - dot / 2), top: u(cy - dot / 2), width: u(dot), height: u(dot) }} />
+            <img loading="lazy" decoding="async" src="/home/pin-dot.svg" alt="" style={{ position: "absolute", left: u(cx - dot / 2), top: u(cy - dot / 2), width: u(dot), height: u(dot) }} />
             {labels && (
               <>
                 <span style={{ position: "absolute", left: u(X(p.line[0])), top: u(Y(p.line[1])), width: u(60), height: 1, background: "var(--ink-2)" }} />

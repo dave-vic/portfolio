@@ -22,7 +22,7 @@ function Word({ tok, i, n, p, pill }: { tok: Tok; i: number; n: number; p: Motio
     const [w, h, l, tp] = tok.pill;
     return (
       <motion.span style={{ opacity: o, display: "inline-block", width: u(pill[0]), height: u(pill[1]), borderRadius: u(pill[1] / 2), overflow: "hidden", position: "relative", flex: "none" }}>
-        <img src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", width: `${w}%`, height: `${h}%`, left: `${l}%`, top: `${tp}%` }} />
+        <img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", width: `${w}%`, height: `${h}%`, left: `${l}%`, top: `${tp}%` }} />
       </motion.span>
     );
   }
@@ -50,7 +50,7 @@ function Signature({ w, h }: { w: number; h: number }) {
       viewport={{ once: true }}
       transition={{ duration: 2.2, ease: EASE, delay: 0.3 }}
     >
-      <img src="/home/signature.svg" alt="" style={{ width: "100%", height: "100%" }} />
+      <img loading="lazy" decoding="async" src="/home/signature.svg" alt="" style={{ width: "100%", height: "100%" }} />
     </motion.div>
   );
 }

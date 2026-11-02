@@ -63,7 +63,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
       {/* tiles slide / drop in over the word */}
       {L.tiles.map((k, i) => {
         const inner = (
-          <img src={k.src} alt={k.label ? `${k.label} preview` : ""} className="wk-tile-img"
+          <img decoding="async" src={k.src} alt={k.label ? `${k.label} preview` : ""} className="wk-tile-img"
             style={k.img ?? { width: "100%", height: "100%", objectFit: "cover", objectPosition: k.pos ?? "center" }} />
         );
         return (
