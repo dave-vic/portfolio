@@ -22,7 +22,7 @@ const misika: CaseData = {
     ],
     sticker: { lines: ["CASE 07", "MERCHANT", "LOAN"] },
     meta: [["CLIENT", "MISIKA, GHANA"], ["ROLE", "PRODUCT · UX · GROWTH"], ["YEAR", "2026"]],
-    stat: "*171# · 5 STEPS · CALL BACK IN ONE WORKING DAY",
+    stat: "LIVE · *171# · 5 STEPS · CALL BACK IN ONE WORKING DAY",
   },
   overview: {
     lede: "MiSika gives eligible mobile money merchants financing when an opportunity comes up. Merchants apply by dialling *171# from an MTN line. I designed the landing page that explains the loan in plain words, and a request-a-call-back path for merchants who want to talk to someone first.",

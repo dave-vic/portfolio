@@ -24,7 +24,7 @@ const hrPortal: CaseData = {
     ],
     sticker: { lines: ["CASE 04", "SIX", "ROLES"] },
     meta: [["CLIENT", "THE NINANI GROUP · VIA INTERACTIVE DIGITAL"], ["ROLE", "UX · UI · AI FEATURE"], ["YEAR", "2025"]],
-    stat: "6 ROLES · WEB · TABLET · MOBILE · AI HELPER",
+    stat: "LIVE · 6 ROLES · WEB · TABLET · MOBILE · AI HELPER",
   },
   overview: {
     lede: "The Ninani Group needed one place for its people to handle HR: leave, payslips, letters, onboarding and offboarding. I designed a portal for six roles, from employee to COO, with Ninani Assist, an AI helper, built in.",
@@ -99,6 +99,8 @@ const hrPortal: CaseData = {
     label: "(07) OUTCOME",
     h: "One portal for every HR task, across six roles and three screen sizes.",
     nums: [["6", "roles, each with its own view"], ["6", "core HR journeys"], ["3", "screen sizes: web, tablet, mobile"], ["1", "AI helper, Ninani Assist"]],
+    learned: "Designing one leave request for six roles taught me to start from the hand-offs, not the screens. Once every view answered who holds the request now and what they need to decide, each role’s screens got simpler.",
+    next: "The portal is now live and in use at The Ninani Group. Next is watching how each role actually uses it, then refining the approval flow and Ninani Assist from what we learn.",
   },
   next: NEXT["misika"],
 };
