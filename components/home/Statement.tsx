@@ -72,7 +72,7 @@ export default function Statement() {
         <div style={at(220, 260)}><Sentence size={76} ls={-2.28} gap={[14, 20]} pill={[170, 88]} width={1290} /></div>
         <Reveal delay={0.9} y={20} style={at(220, 787, 460)}><p style={{ ...t(17, 1.5), color: "var(--muted)" }}>{SUB}</p></Reveal>
         <div style={at(1201.37, 835.35)}><Signature w={432.3} h={96.07} /></div>
-        <p className="mono abs" style={{ ...at(1672, 967), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.4, 0.24) }}>DAVIDA DZATO<br />PRODUCT DESIGNER</p>
+        <p className="mono abs" style={{ ...at(1672, 967), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.4, 0.24) }}>DAVIDA DZATO<br />PRODUCT DESIGNER & PM</p>
         <Reveal delay={1.1} y={20} style={at(220, 947)}><LinkedIn /></Reveal>
       </div>
 
@@ -86,7 +86,7 @@ export default function Statement() {
             </div>
             <p style={{ ...t(T ? 17 : 16, 1.45), color: "var(--muted)", marginTop: u(28) }}>{SUB}</p>
             <div style={{ marginTop: u(28) }}><Signature w={T ? 320 : 240} h={T ? 69 : 52} /></div>
-            <p className="mono" style={{ ...t(11, 1.5, 0.33), marginTop: u(28) }}>DAVIDA DZATO<br />PRODUCT DESIGNER</p>
+            <p className="mono" style={{ ...t(11, 1.5, 0.33), marginTop: u(28) }}>DAVIDA DZATO<br />PRODUCT DESIGNER & PM</p>
             <div style={{ marginTop: u(28) }}><LinkedIn /></div>
           </div>
         );

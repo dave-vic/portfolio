@@ -25,7 +25,7 @@ const ghipss: CaseData = {
   },
   overview: {
     lede: "GhIPSS runs Ghana’s interbank payment systems: GhIPSS Instant Pay, gh-link, e-zwich, GhanaPay and mobile money interoperability. Its current website repeats itself, hides its FAQs near the bottom and says little about who each service is for. As a personal case study at Interactive Digital, I redesigned the homepage around a clear promise, the numbers that show its scale, the products in one place, and a way in for banks, regulators, retailers and developers.",
-    phone: { x: 1286, y: 75.8, w: 380, h: 420, rot: 4, r: 14, shadow: 0.3, img: { src: P + "access.webp", alt: "Personalized access points for each audience" } },
+    phone: { x: 1150, y: 120, w: 540, h: 597, rot: 3, r: 14, shadow: 0.3, img: { src: P + "access.webp", alt: "Personalized access points for each audience" } },
     facts: [["ROLE", "UX, UI, web"], ["PLATFORMS", "Website, desktop"], ["DELIVERED", "Two homepage layouts: a first version and a rearranged one that brings the mission forward"]],
   },
   more: {
@@ -34,10 +34,11 @@ const ghipss: CaseData = {
     hw: 960,
     word: "CASH-LITE",
     wordW: 1665,
+    height: 1560,
     cards: [
-      { x: 70, y: 470, w: 520, h: 351, rot: -5, r: 12, shadow: 0.35, img: { src: P + "backbone.webp", alt: "The backbone of Ghana’s financial space: 120+ institutions, 99.9% uptime" }, badge: [540, 420, 80], cap: "THE NUMBERS\nSCALE, SHOWN NOT TOLD", capAt: [90, 900, 480] },
-      { x: 604, y: 390, w: 520, h: 321, rot: 2, r: 12, shadow: 0.35, img: { src: P + "initiatives.webp", alt: "Strategic initiatives: digital cedi, ISO 20022, universal QR" }, badge: [1074, 350, 80], cap: "INITIATIVES\nDIGITAL CEDI, ISO 20022, UNIVERSAL QR", capAt: [624, 800, 480] },
-      { x: 1138, y: 480, w: 520, h: 325, rot: 5, r: 12, shadow: 0.35, img: { src: P + "cta.webp", alt: "Looking to connect with GhIPSS? Partner with us" }, badge: [1608, 440, 80], cap: "PARTNER WITH US\nONE CLEAR NEXT STEP", capAt: [1158, 900, 480] },
+      { x: 30, y: 400, w: 700, h: 472, rot: -5, r: 14, shadow: 0.4, img: { src: P + "backbone.webp", alt: "The backbone of Ghana’s financial space: 120+ institutions, 99.9% uptime" }, badge: [650, 350, 90], cap: "THE NUMBERS\nSCALE, SHOWN NOT TOLD", capAt: [60, 1000, 520] },
+      { x: 1000, y: 430, w: 700, h: 438, rot: 5, r: 14, shadow: 0.4, img: { src: P + "cta.webp", alt: "Looking to connect with GhIPSS? Partner with us" }, badge: [1630, 400, 90], cap: "PARTNER WITH US\nONE CLEAR NEXT STEP", capAt: [1270, 960, 420] },
+      { x: 500, y: 560, w: 740, h: 456, rot: -1, r: 14, shadow: 0.45, img: { src: P + "initiatives.webp", alt: "Strategic initiatives: digital cedi, ISO 20022, universal QR" }, badge: [1175, 520, 90], cap: "INITIATIVES\nDIGITAL CEDI, ISO 20022, UNIVERSAL QR", capAt: [610, 1080, 520] },
     ],
   },
   next: NEXT["talent-hub"],

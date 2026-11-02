@@ -50,10 +50,10 @@ export default function Intro() {
         {[70, 118, 166, 214].map((y) => <p key={y} className="mono abs" style={{ ...at(56, y), ...t(20, 1) }}>+</p>)}
         <img loading="lazy" decoding="async" src="/home/mark.svg" alt="" style={at(150, 70, 100, 100)} />
         <div style={at(290, 64)}><Name size={44} /></div>
-        <p className="mono abs pre" style={{ ...at(56, 440), ...t(12, 1.7, 0.24) }}>{`ROLE :       Product design · UX/UI · Analysis · AI\nBASED :      Accra, Ghana`}</p>
+        <p className="mono abs pre" style={{ ...at(56, 440), ...t(12, 1.7, 0.24) }}>{`ROLE :       Product design · PM · Analysis · BD · AI\nBASED :      Accra, Ghana`}</p>
         <Dots x={1240} y={34} set={["i-e0.svg", "i-e1.svg", "i-e2.svg"]} />
 
-        <p className="abs" style={{ ...at(56, 600), ...t(14, 1.4), color: "var(--on-dark)" }}>Product designer<br />Complex products · AI</p>
+        <p className="abs" style={{ ...at(56, 600), ...t(14, 1.4), color: "var(--on-dark)" }}>Product design · PM<br />Analysis · AI</p>
         <p className="abs" style={{ ...at(615, 600), ...t(14, 1.4), color: "var(--on-dark)", transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap" }}>Designing<br />since 2022</p>
         <div style={{ ...at(12, 680, 560, 1), background: "var(--on-dark)" }} />
 
@@ -77,14 +77,14 @@ export default function Intro() {
                   <img loading="lazy" decoding="async" src="/home/mark.svg" alt="" style={{ width: u(64), height: u(64) }} />
                   <Name size={T ? 34 : 30} />
                 </div>
-                <p className="mono pre" style={{ ...t(11, 1.5, 0.33) }}>{`ROLE :    Product design · UX/UI · Analysis · AI\nBASED :   Accra, Ghana`}</p>
+                <p className="mono pre" style={{ ...t(11, 1.5, 0.33) }}>{`ROLE :    Product design · PM · Analysis · BD · AI\nBASED :   Accra, Ghana`}</p>
               </Slide>
               <Slide from="r" delay={0.1} style={{ ...card(T ? 380 : 300) }}>
                 <img loading="lazy" decoding="async" src="/home/intro-photo.jpg" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "30% 30%" }} />
               </Slide>
               <Slide from="l" delay={0.15} style={{ ...card(T ? 380 : 220), background: GRAD, padding: u(26) }}>
                 <div style={{ display: "flex", justifyContent: "space-between", color: "var(--on-dark)", ...t(13, 1.4) }}>
-                  <p>Product designer<br />Complex products · AI</p>
+                  <p>Product design · PM<br />Analysis · AI</p>
                   <p style={{ textAlign: "right" }}>Designing<br />since 2022</p>
                 </div>
               </Slide>

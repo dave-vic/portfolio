@@ -8,7 +8,7 @@ import Contact from "@/components/home/Contact";
 
 export const metadata: Metadata = {
   title: "About · Davida Dzato",
-  description: "Product designer in Accra working remotely: experience, how I work and the tools I use.",
+  description: "Product designer and product manager in Accra, working remotely: experience, how I work and the tools I use.",
 };
 
 export default function AboutPage() {

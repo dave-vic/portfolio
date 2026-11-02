@@ -89,7 +89,7 @@ export default function Nav() {
         {/* desktop */}
         <div className="only-d mono" style={{ position: "relative", height: u(96) }}>
           <Link href="/" style={{ ...t(12, 1.4), position: "absolute", left: u(56), top: u(36), pointerEvents: "auto" }}>
-            DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI
+            DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
           <p style={{ ...t(12), position: "absolute", left: "50%", top: u(36), transform: "translateX(-50%)" }} className="nowrap">{label}</p>
           <nav style={{ position: "absolute", right: u(56), top: u(36), display: "flex", gap: u(28), pointerEvents: "auto" }} aria-label="Main">
@@ -101,7 +101,7 @@ export default function Nav() {
         {/* tablet */}
         <div className="only-t mono" style={{ position: "relative", height: u(66) }}>
           <Link href="/" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(40), top: u(20), pointerEvents: "auto" }}>
-            DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI
+            DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
           <nav style={{ position: "absolute", right: u(40), top: u(27), display: "flex", gap: u(22), pointerEvents: "auto" }} aria-label="Main">
             {LINKS.map((l) => (
@@ -112,7 +112,7 @@ export default function Nav() {
         {/* mobile: name only (menu button sits outside the blend) */}
         <div className="only-m mono" style={{ position: "relative", height: u(71) }}>
           <Link href="/" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(20), top: u(23), pointerEvents: "auto" }}>
-            DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI
+            DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
         </div>
       </header>
@@ -133,7 +133,7 @@ export default function Nav() {
         <div id="menu" role="dialog" aria-modal="true" aria-label="Menu"
           style={{ position: "fixed", inset: 0, zIndex: 60, background: "var(--ink)", color: "var(--on-dark)", padding: `${u(20)} ${u(20)}` }}>
           <div className="mono" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <p style={t(10, 1.5, 0.3)}>DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI</p>
+            <p style={t(10, 1.5, 0.3)}>DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI</p>
             <button onClick={() => setOpen(false)} className="mono"
               style={{ height: u(35), padding: `0 ${u(16)}`, borderRadius: 99, background: "var(--bone)", color: "var(--ink)", ...t(11, 1.5, 0.33) }}>
               CLOSE ✕

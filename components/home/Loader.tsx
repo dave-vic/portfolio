@@ -66,7 +66,7 @@ export default function Loader() {
       {/* top row */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: welcome ? 0.3 : 1 }} transition={{ duration: 0.6 }}
         className="mono" style={{ display: "flex", justifyContent: "space-between", ...mono }}>
-        <p>DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI</p>
+        <p>DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI</p>
         <button onClick={end} className="mono pre" style={{ ...mono, height: "fit-content" }}>{`SKIP  →`}</button>
       </motion.div>
 

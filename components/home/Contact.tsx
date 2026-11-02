@@ -64,7 +64,7 @@ export default function Contact() {
       <div className="only-d sec" style={{ height: u(1117) }}>
         <motion.img loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }}
           initial={{ scale: 1.12, opacity: 0.6 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.6, ease: EASE }} />
-        {[["OPEN TO", "REMOTE ROLES WORLDWIDE", 56], ["BASED IN", "ACCRA, GHANA · GMT", 486], ["COPYRIGHT", "© 2026 DAVIDA DZATO", 916], ["WORKING ACROSS", "PRODUCT DESIGN · RESEARCH · AI", 1346]].map(([a, b, x]) => (
+        {[["OPEN TO", "REMOTE ROLES WORLDWIDE", 56], ["BASED IN", "ACCRA, GHANA · GMT", 486], ["COPYRIGHT", "© 2026 DAVIDA DZATO", 916], ["WORKING ACROSS", "PRODUCT DESIGN · PM · ANALYSIS · AI", 1346]].map(([a, b, x]) => (
           <p key={a as string} className="mono abs" style={{ ...at(x as number, 40), ...t(11, 1.4, 0.22) }}>{a}<br />{b}</p>
         ))}
         <Letters text="LET’S" style={{ ...at(56, 280), ...t(240, 0.9, -14.4), fontWeight: 500 }} />

@@ -89,7 +89,7 @@ export default function Hero() {
           </Line>
           <Line play={play} i={2}>
             <span className="nowrap" style={big}>THAT WORK.</span>
-            <Fade play={play} delay={1.15} style={{ ...t(21, 1.1), fontStyle: "italic", marginLeft: u(28), fontFamily: "var(--f-serif)" }}>Product designer<br />for complex products<br />with many kinds of users</Fade>
+            <Fade play={play} delay={1.15} style={{ ...t(21, 1.1), fontStyle: "italic", marginLeft: u(28), fontFamily: "var(--f-serif)" }}>Product design, management<br />and analysis for complex<br />products with many users</Fade>
           </Line>
         </h1>
         <motion.div style={{ ...at(56, 1014, 1616), borderTop: "1px solid var(--ink)" }} initial={{ opacity: 0 }} animate={{ opacity: play ? 1 : 0 }} transition={{ duration: 0.9, delay: 1.3 }}>
@@ -120,7 +120,7 @@ export default function Hero() {
               <Line play={play} i={3}><span className="nowrap" style={B}>THAT WORK.</span></Line>
             </h1>
             <p className="serif" style={{ ...t(T ? 18 : 16, 1.3), fontStyle: "italic", marginTop: u(18), width: u(T ? 300 : 262) }}>
-              Product designer for complex products with many kinds of users
+              Product design, management and analysis for complex products with many kinds of users
             </p>
             <div style={{ height: u(T ? 48 : 24), marginTop: u(18) }} />
             <div style={{ borderTop: "1px solid var(--ink)", marginTop: u(18), paddingTop: u(18) }}>

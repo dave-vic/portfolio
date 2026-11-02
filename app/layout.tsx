@@ -12,12 +12,12 @@ import MotionRoot from "@/components/MotionRoot";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://davida-dzato.vercel.app"),
-  title: "Davida Dzato · Product designer",
+  title: "Davida Dzato · Product designer & PM",
   description:
-    "Product designer for complex products with many kinds of users. Based in Accra, open to remote roles worldwide.",
+    "Product design, management and analysis for complex products with many kinds of users. Based in Accra, open to remote roles worldwide.",
   openGraph: {
-    title: "Davida Dzato · Product designer",
-    description: "Product designer for complex products with many kinds of users.",
+    title: "Davida Dzato · Product designer & PM",
+    description: "Product design, management and analysis for complex products with many kinds of users.",
     images: ["/home/hero-photo.jpg"],
   },
 };
