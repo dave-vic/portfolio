@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { u, t } from "@/lib/u";
 
@@ -13,6 +14,35 @@ const LINKS = [
 export default function Nav() {
   const [label, setLabel] = useState("(01) INDEX");
   const [open, setOpen] = useState(false);
+  const path = usePathname();
+
+  // once the page scrolls, the nav sits on a bar that takes the tone of the section underneath it
+  const [bar, setBar] = useState<null | "light" | "dark">(null);
+  useEffect(() => {
+    let raf = 0;
+    const tone = (): "light" | "dark" => {
+      const header = document.querySelector<HTMLElement>("header[data-nav]");
+      const y = (header?.offsetHeight ?? 80) + 2;
+      for (const el of document.elementsFromPoint(window.innerWidth / 2, y)) {
+        if (el.closest("header[data-nav]")) continue;
+        for (let n: Element | null = el; n; n = n.parentElement) {
+          const bg = getComputedStyle(n).backgroundColor;
+          const m = bg.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
+          if (m && (m[4] === undefined || parseFloat(m[4]) > 0.5)) {
+            const l = (0.299 * +m[1] + 0.587 * +m[2] + 0.114 * +m[3]) / 255;
+            return l < 0.5 ? "dark" : "light";
+          }
+        }
+        break;
+      }
+      return "light";
+    };
+    const on = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => setBar(window.scrollY > 24 ? tone() : null)); };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", on);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+  }, [path]);
 
   // middle label follows the section in view, like the Figma frames
   useEffect(() => {
@@ -21,19 +51,21 @@ export default function Nav() {
       (es) => es.forEach((e) => e.isIntersecting && setLabel(e.target.getAttribute("data-label") || "")),
       { rootMargin: "-45% 0px -50% 0px" }
     );
+    setLabel(els[0]?.getAttribute("data-label") || "");
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [path]);
 
   // step aside over the contact section, which has its own top row (as in Figma)
   const [hide, setHide] = useState(false);
   useEffect(() => {
+    setHide(false);
     const c = document.getElementById("contact");
     if (!c) return;
     const io = new IntersectionObserver(([e]) => setHide(e.isIntersecting), { rootMargin: "0px 0px -92% 0px" });
     io.observe(c);
     return () => io.disconnect();
-  }, []);
+  }, [path]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -41,12 +73,21 @@ export default function Nav() {
 
   return (
     <>
-      {/* white text + difference blend = ink on light sections, light on dark ones */}
-      <header
-        style={{ position: "fixed", inset: "0 0 auto 0", zIndex: 50, mixBlendMode: "difference", color: "#fff", pointerEvents: "none", opacity: hide ? 0 : 1, visibility: hide ? "hidden" : "visible", transition: "opacity .35s, visibility .35s" }}
+      {/* at the top: white text + difference blend (ink on light, light on dark). Scrolled: a soft bar in the tone of the section below */}
+      <header data-nav
+        style={{
+          position: "fixed", inset: "0 0 auto 0", zIndex: 50, pointerEvents: "none",
+          mixBlendMode: bar ? "normal" : "difference",
+          color: bar === "dark" ? "var(--on-dark)" : bar === "light" ? "var(--ink)" : "#fff",
+          background: bar === "dark" ? "rgba(20,20,20,.86)" : bar === "light" ? "rgba(238,235,228,.88)" : "transparent",
+          backdropFilter: bar ? "blur(14px)" : "none", WebkitBackdropFilter: bar ? "blur(14px)" : "none",
+          borderBottom: `1px solid ${bar === "dark" ? "rgba(255,255,255,.08)" : bar === "light" ? "rgba(20,20,20,.08)" : "transparent"}`,
+          opacity: hide ? 0 : 1, visibility: hide ? "hidden" : "visible",
+          transition: "opacity .35s, visibility .35s, background-color .35s, color .35s, border-color .35s",
+        }}
       >
         {/* desktop */}
-        <div className="only-d mono" style={{ position: "relative", height: u(80) }}>
+        <div className="only-d mono" style={{ position: "relative", height: u(96) }}>
           <Link href="/" style={{ ...t(12, 1.4), position: "absolute", left: u(56), top: u(36), pointerEvents: "auto" }}>
             DAVIDA DZATO®<br />PRODUCT DESIGNER · UX · AI
           </Link>
