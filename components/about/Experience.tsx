@@ -12,7 +12,7 @@ const JOBS = [
   { years: "Dec 2024 – now", role: "PM, Scrum Master & designer", company: "Cynteract, Germany · Remote", did: "Sprints for a distributed health-tech team: production bugs down 60%, on-time delivery up to 90%." },
   { years: "Dec 2024 – now", role: "Product designer", company: "Silver Rock Technologies, Accra", did: "Ghana Talent Hub, AfriPlay and Glo TV streaming, and Elysium Tours." },
   { years: "2023 – 2024", role: "Developer & product designer", company: "Volta River Authority, Accra", did: "National service: system documentation, Figma prototypes and PHP support." },
-  { years: "2022 – 2023", role: "UI/UX designer", company: "Iota Digital Lab, USA · Remote", did: "Designed the whole BlaccBook business app, now live on the App Store." },
+  { years: "2022 – 2023", role: "UI/UX designer", company: "Iota Digital Lab, USA · Remote", did: "Designed the whole BlaccBook app for finding and booking local businesses, now live on the App Store." },
 ];
 
 const line = (extra: React.CSSProperties = {}): React.CSSProperties => ({ height: 1, background: "var(--ink)", ...extra });
