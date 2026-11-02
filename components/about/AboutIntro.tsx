@@ -42,12 +42,12 @@ export default function AboutIntro() {
     <section data-label="(ABOUT) WHO I AM" aria-label="About Davida">
       {/* desktop */}
       <div className="only-d sec" style={{ height: u(1117), background: "var(--ink)" }}>
-        <Slide from="l" style={{ ...at(12, 12, 1006.74, 537) }}><img decoding="async" src="/home/panel-identity.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="l" style={{ ...at(12, 12, 1006.74, 537) }}><img decoding="async" src="/home/panel-identity.svg" data-tone="light" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
         <Slide from="r" delay={0.1} style={{ ...at(753.49, 12, 962.55, 537) }}><img decoding="async" src="/about/intro-panel.webp" alt="Davida Dzato in Accra" style={{ width: "100%", height: "100%" }} /></Slide>
         {/* soft shade at the top of the photo so the navigation reads over it */}
         <div aria-hidden style={{ ...at(1000, 12, 716, 120), background: "linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,0))", borderTopRightRadius: u(28), pointerEvents: "none" }} />
-        <Slide from="l" delay={0.2} style={{ ...at(12, 563, 665.05, 542) }}><img decoding="async" src="/home/panel-gradient.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
-        <Slide from="r" delay={0.3} style={{ ...at(408.73, 563, 1307.25, 542) }}><img decoding="async" src="/home/panel-text.svg" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="l" delay={0.2} style={{ ...at(12, 563, 665.05, 542) }}><img decoding="async" src="/home/panel-gradient.svg" data-tone="dark" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
+        <Slide from="r" delay={0.3} style={{ ...at(408.73, 563, 1307.25, 542) }}><img decoding="async" src="/home/panel-text.svg" data-tone="light" alt="" style={{ width: "100%", height: "100%" }} /></Slide>
 
         {[134, 182, 230, 278].map((y) => <p key={y} className="mono abs" style={{ ...at(56, y), ...t(20, 1) }}>+</p>)}
         <img decoding="async" src="/home/mark.svg" alt="" style={at(150, 134, 100, 100)} />
@@ -72,7 +72,7 @@ export default function AboutIntro() {
         const T = bp === "t";
         const card = (h: number): React.CSSProperties => ({ position: "relative", borderRadius: u(28), overflow: "hidden", height: u(h) });
         return (
-          <div key={bp} className={T ? "only-t" : "only-m"} style={{ background: "var(--ink)", padding: u(10) }}>
+          <div key={bp} className={T ? "only-t" : "only-m"} style={{ background: "var(--ink)", padding: u(10), paddingTop: u(T ? 74 : 80) }}>
             <div style={{ display: "grid", gridTemplateColumns: T ? "1fr 1fr" : "1fr", gap: u(8) }}>
               <Slide from="l" style={{ ...card(T ? 380 : 204), background: "var(--bone)", padding: u(26), display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: u(18) }}>

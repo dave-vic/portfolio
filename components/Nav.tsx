@@ -16,33 +16,79 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
 
-  // once the page scrolls, the nav sits on a bar that takes the tone of the section underneath it
+  // What sits under a point: a light surface, a dark one, or a photo. Images can say so with data-tone.
+  type Tone = "light" | "dark" | "photo";
+  // is this point of an image see-through? (the slanted panels are PNG/SVG/WebP with transparent corners)
+  const clearAt = (img: HTMLImageElement, x: number, y: number) => {
+    try {
+      const r = img.getBoundingClientRect();
+      if (!img.naturalWidth) return false;
+      const c = document.createElement("canvas"); c.width = 1; c.height = 1;
+      const g = c.getContext("2d", { willReadFrequently: true }); if (!g) return false;
+      const sx = ((x - r.left) / r.width) * img.naturalWidth, sy = ((y - r.top) / r.height) * img.naturalHeight;
+      g.drawImage(img, sx, sy, 1, 1, 0, 0, 1, 1);
+      return g.getImageData(0, 0, 1, 1).data[3] < 40;
+    } catch { return false; }
+  };
+  const toneAt = (x: number, y: number): Tone => {
+    for (const el of document.elementsFromPoint(x, y)) {
+      if (el.closest("header[data-nav]")) continue;
+      const tagged = el.closest<HTMLElement>("[data-tone]");
+      if (tagged) return tagged.dataset.tone as Tone;
+      if (el.tagName === "IMG" && !/\.svg($|\?)/.test((el as HTMLImageElement).currentSrc) && clearAt(el as HTMLImageElement, x, y)) continue;
+      if (el.tagName === "IMG" || el.tagName === "VIDEO") return "photo";
+      // layers come top to bottom: the first one with its own solid background decides
+      const bg = getComputedStyle(el).backgroundColor;
+      const m = bg.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
+      if (m && (m[4] === undefined || parseFloat(m[4]) > 0.5)) {
+        const l = (0.299 * +m[1] + 0.587 * +m[2] + 0.114 * +m[3]) / 255;
+        return l < 0.5 ? "dark" : "light";
+      }
+    }
+    return "light";
+  };
+
+  // Scrolled: one soft bar in the tone of the section below. At the very top: no bar, and each part of the nav
+  // (name, label, links) picks a solid colour for whatever is behind it, with a shadow over photos.
   const [bar, setBar] = useState<null | "light" | "dark">(null);
+  const [parts, setParts] = useState<{ l: Tone; c: Tone; r: Tone }>({ l: "light", c: "light", r: "light" });
   useEffect(() => {
     let raf = 0;
-    const tone = (): "light" | "dark" => {
+    const measure = () => {
       const header = document.querySelector<HTMLElement>("header[data-nav]");
-      const y = (header?.offsetHeight ?? 80) + 2;
-      for (const el of document.elementsFromPoint(window.innerWidth / 2, y)) {
-        if (el.closest("header[data-nav]")) continue;
-        for (let n: Element | null = el; n; n = n.parentElement) {
-          const bg = getComputedStyle(n).backgroundColor;
-          const m = bg.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
-          if (m && (m[4] === undefined || parseFloat(m[4]) > 0.5)) {
-            const l = (0.299 * +m[1] + 0.587 * +m[2] + 0.114 * +m[3]) / 255;
-            return l < 0.5 ? "dark" : "light";
-          }
-        }
-        break;
+      if (window.scrollY > 24) {
+        const y = (header?.offsetHeight ?? 80) + 2;
+        const t = toneAt(window.innerWidth / 2, y);
+        setBar(t === "dark" ? "dark" : "light");
+        return;
       }
-      return "light";
+      setBar(null);
+      const pick = (sel: string): Tone => {
+        const el = Array.from(header?.querySelectorAll<HTMLElement>(sel) ?? []).find((n) => n.offsetParent !== null);
+        if (!el) return "light";
+        const r = el.getBoundingClientRect();
+        // sample along the text: a photo anywhere wins, otherwise the majority tone
+        const ts = [0.05, 0.3, 0.5, 0.7, 0.95].map((f) => toneAt(r.left + r.width * f, r.top + r.height / 2));
+        if (ts.includes("photo")) return "photo";
+        return ts.filter((x) => x === "dark").length > ts.length / 2 ? "dark" : "light";
+      };
+      setParts({ l: pick("[data-part=l]"), c: pick("[data-part=c]"), r: pick("[data-part=r]") });
     };
-    const on = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => setBar(window.scrollY > 24 ? tone() : null)); };
+    const on = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(measure); };
     on();
+    // sections animate in on load; look again once they have settled
+    const timers = [300, 1200, 2600, 4000].map((ms) => window.setTimeout(on, ms));
     window.addEventListener("scroll", on, { passive: true });
     window.addEventListener("resize", on);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+    return () => { cancelAnimationFrame(raf); timers.forEach(clearTimeout); window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
+  const partStyle = (tn: Tone): React.CSSProperties => (bar ? {} : {
+    color: tn === "light" ? "var(--ink)" : "var(--on-dark)",
+    transition: "color .35s",
+    // over a photo: a soft dark pill behind the text so every word reads
+    ...(tn === "photo" ? { background: "rgba(20,20,20,.42)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", padding: `${u(6)} ${u(14)}`, margin: `${u(-6)} ${u(-14)}`, borderRadius: 99 } : {}),
+  });
 
   // middle label follows the section in view, like the Figma frames
   useEffect(() => {
@@ -77,8 +123,7 @@ export default function Nav() {
       <header data-nav
         style={{
           position: "fixed", inset: "0 0 auto 0", zIndex: 50, pointerEvents: "none",
-          mixBlendMode: bar ? "normal" : "difference",
-          color: bar === "dark" ? "var(--on-dark)" : bar === "light" ? "var(--ink)" : "#fff",
+          color: bar === "dark" ? "var(--on-dark)" : "var(--ink)",
           background: bar === "dark" ? "rgba(20,20,20,.86)" : bar === "light" ? "rgba(238,235,228,.88)" : "transparent",
           backdropFilter: bar ? "blur(14px)" : "none", WebkitBackdropFilter: bar ? "blur(14px)" : "none",
           borderBottom: `1px solid ${bar === "dark" ? "rgba(255,255,255,.08)" : bar === "light" ? "rgba(20,20,20,.08)" : "transparent"}`,
@@ -88,11 +133,11 @@ export default function Nav() {
       >
         {/* desktop */}
         <div className="only-d mono" style={{ position: "relative", height: u(96) }}>
-          <Link href="/" style={{ ...t(12, 1.4), position: "absolute", left: `calc(var(--gx) + ${u(56)})`, top: u(36), pointerEvents: "auto" }}>
+          <Link href="/" data-part="l" style={{ ...t(12, 1.4), position: "absolute", left: `calc(var(--gx) + ${u(56)})`, top: u(36), pointerEvents: "auto", ...partStyle(parts.l) }}>
             DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
-          <p style={{ ...t(12), position: "absolute", left: "50%", top: u(36), transform: "translateX(-50%)" }} className="nowrap">{label}</p>
-          <nav style={{ position: "absolute", right: `calc(var(--gx) + ${u(56)})`, top: u(36), display: "flex", gap: u(28), pointerEvents: "auto" }} aria-label="Main">
+          <p data-part="c" style={{ ...t(12), position: "absolute", left: "50%", top: u(36), transform: "translateX(-50%)", ...partStyle(parts.c) }} className="nowrap">{label}</p>
+          <nav data-part="r" style={{ position: "absolute", right: `calc(var(--gx) + ${u(56)})`, top: u(36), display: "flex", gap: u(28), pointerEvents: "auto", ...partStyle(parts.r) }} aria-label="Main">
             {LINKS.map((l) => (
               <Link key={l.href} href={l.href} className="navlink" style={t(12)}>{l.label}</Link>
             ))}
@@ -100,10 +145,10 @@ export default function Nav() {
         </div>
         {/* tablet */}
         <div className="only-t mono" style={{ position: "relative", height: u(66) }}>
-          <Link href="/" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(40), top: u(20), pointerEvents: "auto" }}>
+          <Link href="/" data-part="l" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(40), top: u(20), pointerEvents: "auto", ...partStyle(parts.l) }}>
             DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
-          <nav style={{ position: "absolute", right: u(40), top: u(27), display: "flex", gap: u(22), pointerEvents: "auto" }} aria-label="Main">
+          <nav data-part="r" style={{ position: "absolute", right: u(40), top: u(27), display: "flex", gap: u(22), pointerEvents: "auto", ...partStyle(parts.r) }} aria-label="Main">
             {LINKS.map((l) => (
               <Link key={l.href} href={l.href} className="navlink" style={t(11, 1.5, 0.33)}>{l.label}</Link>
             ))}
@@ -111,7 +156,7 @@ export default function Nav() {
         </div>
         {/* mobile: name only (menu button sits outside the blend) */}
         <div className="only-m mono" style={{ position: "relative", height: u(71) }}>
-          <Link href="/" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(20), top: u(23), pointerEvents: "auto" }}>
+          <Link href="/" data-part="l" style={{ ...t(10, 1.5, 0.3), position: "absolute", left: u(20), top: u(23), pointerEvents: "auto", ...partStyle(parts.l) }}>
             DAVIDA DZATO®<br />PRODUCT DESIGN · PM · ANALYSIS · AI
           </Link>
         </div>
