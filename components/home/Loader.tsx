@@ -1,11 +1,13 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { finishIntro, introSeen } from "@/lib/intro";
+import { finishIntro } from "@/lib/intro";
 import { t, u } from "@/lib/u";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
 const COUNT_MS = 2000;
+/** plays on every full page load; moving between pages inside the site does not replay it */
+let playedThisLoad = false;
 
 /**
  * Figma "Loader": the bracketed photo with "Bringing the work in", a counter 000 → 100 over a rust line,
@@ -28,7 +30,8 @@ export default function Loader() {
   };
 
   useEffect(() => {
-    if (introSeen() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { end(); return; }
+    if (playedThisLoad || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { end(); return; }
+    playedThisLoad = true;
     document.documentElement.style.overflow = "hidden";
     const t0 = performance.now() + 250;
     const tick = (now: number) => {

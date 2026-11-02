@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 import { at, t, u } from "@/lib/u";
@@ -20,14 +20,14 @@ const SLIDES = [
 
 /** advances on its own only while on screen, starting after the entrance has played */
 function useSlides(active: boolean) {
-  const [k, setK] = useState(0);
+  const [[k, dir], setK] = useState<[number, number]>([0, 1]);
   const [paused, setPaused] = useState(false);
   useEffect(() => {
     if (!active || paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setK((v) => (v + 1) % SLIDES.length), 6000);
+    const id = setInterval(() => setK(([v]) => [(v + 1) % SLIDES.length, 1]), 6000);
     return () => clearInterval(id);
   }, [paused, active]);
-  return { k, go: (d: number) => { setPaused(true); setK((v) => (v + d + SLIDES.length) % SLIDES.length); } };
+  return { k, dir, go: (d: number) => { setPaused(true); setK(([v]) => [(v + d + SLIDES.length) % SLIDES.length, d]); } };
 }
 
 /** letters shuffle and settle on the new name when the slide changes (Figma motion) */
@@ -74,19 +74,51 @@ function NameIn({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Front({ s, radius, shadow }: { s: (typeof SLIDES)[number]; radius: number; shadow?: boolean }) {
+/** the front screen: drag or swipe it away and the next project comes forward from the stack */
+function Front({ s, dir, radius, shadow, onFlick }: { s: (typeof SLIDES)[number]; dir: number; radius: number; shadow?: boolean; onFlick: (d: number) => void }) {
   const reduce = useReducedMotion();
   return (
-    <AnimatePresence mode="popLayout" initial={false}>
-      <motion.div key={s.img}
-        initial={{ opacity: 0, rotate: -6, x: "18%" }}
-        animate={{ opacity: 1, rotate: 0, x: 0 }}
-        exit={reduce ? undefined : { opacity: 0, rotate: 6, x: "-18%" }}
-        transition={{ duration: 0.8, ease: EASE }}
-        style={{ position: "absolute", inset: 0, borderRadius: u(radius), overflow: "hidden", boxShadow: shadow ? `0 ${u(24)} ${u(60)} rgba(0,0,0,.18)` : undefined, background: "#fff" }}
-      >
-        <img loading="lazy" decoding="async" src={s.img} alt={s.alt} style={{ width: "100%", height: "auto", minHeight: "100%", objectFit: "cover", objectPosition: "top" }} />
-      </motion.div>
+    <AnimatePresence mode="popLayout" initial={false} custom={dir}>
+      <Card key={s.img} s={s} radius={radius} shadow={shadow} onFlick={onFlick} reduce={!!reduce} />
+    </AnimatePresence>
+  );
+}
+
+const flick = {
+  enter: { opacity: 0, scale: 0.9, y: "4%", rotate: -3 },
+  show: { opacity: 1, scale: 1, y: "0%", x: 0, rotate: 0 },
+  exit: (d: number) => ({ opacity: 0, x: d > 0 ? "-115%" : "115%", rotate: d > 0 ? -16 : 16, transition: { duration: 0.6, ease: EASE } }),
+};
+
+function Card({ s, radius, shadow, onFlick, reduce }: { s: (typeof SLIDES)[number]; radius: number; shadow?: boolean; onFlick: (d: number) => void; reduce: boolean }) {
+  const x = useMotionValue(0);
+  const tilt = useTransform(x, [-400, 0, 400], [-12, 0, 12]);
+  return (
+    <motion.div
+      variants={flick} initial="enter" animate="show" exit={reduce ? undefined : "exit"}
+      transition={{ duration: 0.8, ease: EASE }}
+      drag="x" dragSnapToOrigin dragElastic={0.6}
+      onDragEnd={(_, info) => {
+        if (info.offset.x < -90 || info.velocity.x < -500) onFlick(1);
+        else if (info.offset.x > 90 || info.velocity.x > 500) onFlick(-1);
+      }}
+      whileDrag={{ scale: 1.02 }}
+      aria-label={`${s.name}. Drag or swipe to see the next project`}
+      style={{ x, rotate: tilt, position: "absolute", inset: 0, borderRadius: u(radius), overflow: "hidden", boxShadow: shadow ? `0 ${u(24)} ${u(60)} rgba(0,0,0,.18)` : undefined, background: "#fff", cursor: "grab", touchAction: "pan-y", zIndex: 2 }}
+    >
+      <img decoding="async" draggable={false} src={s.img} alt={s.alt} style={{ width: "100%", height: "auto", minHeight: "100%", objectFit: "cover", objectPosition: "top", pointerEvents: "none", userSelect: "none" }} />
+    </motion.div>
+  );
+}
+
+/** the two screens waiting behind: the next projects in the loop */
+function Back({ s, rot, style }: { s: (typeof SLIDES)[number]; rot: number; style?: React.CSSProperties }) {
+  return (
+    <AnimatePresence initial={false}>
+      <motion.img key={s.img} decoding="async" src={s.img} alt=""
+        initial={{ opacity: 0, rotate: rot * 2 }} animate={{ opacity: 1, rotate: rot }} exit={{ opacity: 0 }}
+        transition={{ duration: 0.7, ease: EASE }}
+        style={{ position: "absolute", objectFit: "cover", objectPosition: "top", borderRadius: u(4), boxShadow: `0 ${u(10)} ${u(30)} rgba(0,0,0,.08)`, ...style }} />
     </AnimatePresence>
   );
 }
@@ -105,7 +137,8 @@ function Marquee({ text, size, ls, top, left }: { text: string; size: number; ls
 export default function Slider() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { amount: 0.4 });
-  const { k, go } = useSlides(inView);
+  const { k, dir, go } = useSlides(inView);
+  const b1 = SLIDES[(k + 1) % SLIDES.length], b2 = SLIDES[(k + 2) % SLIDES.length];
   const s = SLIDES[k];
   const name = useScramble(s.name);
   const n = `0${k + 1} / 03`;
@@ -119,12 +152,12 @@ export default function Slider() {
         <NameIn><Marquee text={name} size={300} ls={-12} top={330} left={-120} /></NameIn>
         {/* stacked cards behind */}
         <Fly i={0} style={{ ...at(464, 236.19, 832.93, 554.59), display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img loading="lazy" decoding="async" src="/home/slide-back1.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(-4deg)" }} />
+          <Back s={b2} rot={-4} style={{ width: u(800), height: u(500) }} />
         </Fly>
         <Fly i={1} style={{ ...at(437.83, 292, 825.07, 541.18), display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img loading="lazy" decoding="async" src="/home/slide-back2.jpg" alt="" style={{ width: u(800), height: u(500), objectFit: "cover", objectPosition: "top", borderRadius: u(4), transform: "rotate(3deg)" }} />
+          <Back s={b1} rot={3} style={{ width: u(800), height: u(500) }} />
         </Fly>
-        <Fly i={2} style={at(461, 290, 806.4, 504)}><Front s={s} radius={7} shadow /></Fly>
+        <Fly i={2} style={at(461, 290, 806.4, 504)}><Front s={s} dir={dir} radius={7} shadow onFlick={go} /></Fly>
         <Reveal delay={1.5} y={14} style={at(554, 874, 620)}><p className="mono" style={{ textAlign: "center", ...t(12, 1.5, 0.24) }}>{s.desc}</p></Reveal>
         <Reveal delay={1.65} y={14} style={at(660, 938)}><p className="mono" style={{ ...t(11, 1.4, 0.33), whiteSpace: "pre" }}>{s.stats.map(([a, b]) => `${a} ${b}`).join("      ·      ")}</p></Reveal>
         <Link href="/work" className="mono abs pre" style={{ ...at(802, 972), ...t(11, 1.4, 0.33), color: "var(--laterite)" }}>{`SEE ALL WORK  →`}</Link>
@@ -147,14 +180,10 @@ export default function Slider() {
             </div>
             <div style={{ position: "relative", height: u(T ? 563 : 334), marginTop: u(20), marginLeft: u(T ? -40 : -20), marginRight: u(T ? -40 : -20), overflow: "hidden" }}>
               <NameIn><Marquee text={name} size={T ? 190 : 120} ls={T ? -7.6 : -4.8} top={0} left={-10} /></NameIn>
-              <div style={{ position: "absolute", left: u(T ? 80 : 28), top: u(T ? 67 : 72), width: u(W), height: u(H), transform: "rotate(4deg)", borderRadius: u(4), overflow: "hidden" }}>
-                <img loading="lazy" decoding="async" src="/home/slide-back1.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
-              </div>
-              <div style={{ position: "absolute", left: u(T ? 58 : 28), top: u(T ? 114 : 72), width: u(W), height: u(H), transform: "rotate(-3deg)", borderRadius: u(4), overflow: "hidden" }}>
-                <img loading="lazy" decoding="async" src="/home/slide-back2.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
-              </div>
+              <Back s={b2} rot={4} style={{ left: u(T ? 80 : 28), top: u(T ? 67 : 72), width: u(W), height: u(H) }} />
+              <Back s={b1} rot={-3} style={{ left: u(T ? 58 : 28), top: u(T ? 114 : 72), width: u(W), height: u(H) }} />
               <Fly i={0} style={{ position: "absolute", left: u(T ? 73 : 28), top: u(T ? 114 : 72), width: u(W), height: u(H) }}>
-                <div style={{ position: "absolute", inset: 0, transform: "rotate(-1deg)" }}><Front s={s} radius={T ? 5.85 : 3.25} shadow /></div>
+                <div style={{ position: "absolute", inset: 0, transform: "rotate(-1deg)" }}><Front s={s} dir={dir} radius={T ? 5.85 : 3.25} shadow onFlick={go} /></div>
               </Fly>
             </div>
             <p className="mono" style={{ ...t(11, 1.5, 0.33), marginTop: u(20) }}>{s.desc}</p>

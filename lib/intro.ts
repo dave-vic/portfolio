@@ -11,7 +11,6 @@ export const introSeen = () => {
 
 export function finishIntro() {
   document.documentElement.dataset.intro = "seen";
-  try { sessionStorage.setItem("dd-intro", "1"); } catch {}
   window.dispatchEvent(new Event(EVT));
 }
 
