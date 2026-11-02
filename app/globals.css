@@ -29,19 +29,18 @@
 @media (min-width: 640px) {
   :root { --u: calc(100vw / 834); }
 }
-@media (min-width: 1100px) {
-  :root { --u: calc(min(100vw, 2200px) / 1728); }
-}
-/* side gutter: 0 until the design reaches its widest (2200px), then the page centres */
+/* Desktop: the 1728 × 1117 Figma frame scales to fit the window's width AND height (never shorter than 760px),
+   so each section fills one screen on any monitor. Any spare width becomes a side gutter; section backgrounds fill it. */
 :root { --gx: 0px; }
-@media (min-width: 2200px) {
-  :root { --gx: calc((100vw - 2200px) / 2); }
-  /* each desktop section sits centred; its background runs out to both edges of the screen */
-  .only-d.sec { width: 2200px; margin-inline: auto; overflow: visible !important; clip-path: inset(0 calc(-1 * var(--gx))); }
-  .only-d.sec::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(-1 * var(--gx)); right: calc(-1 * var(--gx)); background: inherit; z-index: -1; pointer-events: none; }
-  /* full-bleed photos stretch with it */
+@media (min-width: 1100px) {
+  :root {
+    --u: min(100vw / 1728, max(100vh, 760px) / 1117);
+    --gx: max(0px, (100vw - var(--u) * 1728) / 2);
+  }
+  .only-d.sec { width: calc(var(--u) * 1728); margin-inline: auto; overflow: visible !important; clip-path: inset(0 calc(-1 * var(--gx) - 1px)); }
+  .only-d.sec::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(-1 * var(--gx) - 1px); right: calc(-1 * var(--gx) - 1px); background: inherit; z-index: -1; pointer-events: none; }
   .only-d.sec > .bleed { left: calc(-1 * var(--gx)) !important; width: calc(100% + 2 * var(--gx)) !important; }
-  .wide-frame { max-width: 2200px; margin-inline: auto; }
+  .wide-frame { max-width: calc(var(--u) * 1728); margin-inline: auto; }
 }
 
 html { background: var(--bone); overflow-x: hidden; }
