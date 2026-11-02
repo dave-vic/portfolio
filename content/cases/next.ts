@@ -1,6 +1,6 @@
 /** "Next case study" cards. The cases run in a loop:
  *  Talent Hub → Claims → HR portal → MiSika → Medshea → AfriPlay → Talent Hub
- *  Short cases: Loco → Elysium → KB Akuffo → Sway → Know your MoMo → BlaccBook → Talent Hub */
+ *  Short cases: Loco → Elysium → KB Akuffo → Sway → Know your MoMo → BlaccBook → Stanbic Valentine’s game → Talent Hub */
 const box = { x: 1173.7, y: 41.1, w: 520, h: 640, rot: 4, r: 16, shadow: 0.25 };
 type Crop = [number, number, number, number];
 
@@ -41,4 +41,7 @@ export const NEXT = {
   blaccbook: { num: "09", title: ["BlaccBook", "local finds  →"], href: "/work/blaccbook",
     desc: "A mobile app for discovering local businesses, live on the App Store.",
     img: { ...box, img: { src: "/cases/blaccbook/home.webp", alt: "BlaccBook home", crop: [1, 0.569, 0, 0] as Crop, alpha: true } } },
+  "stanbic-valentines": { num: "16", title: ["Stanbic", "love game  →"], href: "/work/stanbic-valentines",
+    desc: "A Valentine’s Day game for Stanbic Bank: ten questions, then your love language.",
+    img: { ...box, img: { src: "/cases/stanbic/start.webp", alt: "Stanbic Valentine’s game start screen", crop: [1, 0.622, 0, 0] as Crop } } },
 };

@@ -42,7 +42,7 @@ const blaccbook: CaseData = {
       { x: 1208, y: 400, w: 340, h: 738, rot: 6, r: 0, shadow: 0.4, img: ph("activity", "Activity with rate and reorder"), badge: [1500, 370, 80], cap: "ACTIVITY\nRATE AND REORDER", capAt: [1220, 1210, 340] },
     ],
   },
-  next: NEXT["talent-hub"],
+  next: NEXT["stanbic-valentines"],
 };
 
 export default blaccbook;
