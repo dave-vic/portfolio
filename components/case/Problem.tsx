@@ -17,7 +17,7 @@ export default function Problem({ c }: { c: CaseData }) {
         {p.nums.map((n, i) => (
           <Reveal key={i} delay={i * 0.15} y={80} style={at(STAIR[i][0], STAIR[i][1])}>
             <Count v={n.n} className="anton" style={{ display: "block", ...t(520, 0.85), color: n.color, whiteSpace: "nowrap" }} />
-            <p style={{ position: "absolute", left: u(10), top: u(432), width: u(300), ...mono(13, 8), color: n.color }}>{n.label}</p>
+            <p style={{ position: "absolute", left: u(10), top: u(462), width: u(360), ...mono(13, 8), color: n.color }}>{n.label}</p>
           </Reveal>
         ))}
         {p.notes.map((n, i) => (

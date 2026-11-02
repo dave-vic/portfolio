@@ -5,7 +5,7 @@ import Contact from "@/components/home/Contact";
 
 export const metadata: Metadata = {
   title: "Work · Davida Dzato",
-  description: "Sixteen projects from 2022 to 2026: product, UX and UI work across fintech, govtech, HR, media, insurance and more.",
+  description: "Seventeen projects from 2022 to 2026: product, UX and UI work across fintech, govtech, HR, media, insurance and more.",
 };
 
 export default function WorkPage() {

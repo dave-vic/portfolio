@@ -43,7 +43,7 @@ const stanbic: CaseData = {
       { x: 1337.7, y: 330.2, w: 340, h: 674, rot: 6, r: 30, shadow: 0.4, img: { src: P + "result.webp", alt: "Results and a detailed heart profile", crop: [1, 0.623, 0, 0] as Crop }, badge: [1560, 324, 80], cap: "RESULTS\nYOUR LOVE LANGUAGE + PROFILE", capAt: [1300, 1080, 340] },
     ],
   },
-  next: NEXT["talent-hub"],
+  next: NEXT["ghipss"],
 };
 
 export default stanbic;

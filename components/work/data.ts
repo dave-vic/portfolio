@@ -74,4 +74,7 @@ export const PROJECTS: Project[] = [
   { n: "16", title: "Stanbic Valentine’s game", desc: "A Valentine’s Day game for Stanbic Bank: ten quick questions about how you feel loved, then your love language and a heart profile to share.",
     sector: "BANKING · CAMPAIGN", role: "UX · UI · MOBILE GAME", year: "2026 · LIVE", meta: "BANKING · CAMPAIGN · UX · UI · 2026 · LIVE",
     href: "/work/stanbic-valentines", cats: ["DESIGN", "BUSINESS"], thumb: shot("stanbic") },
+  { n: "17", title: "GhIPSS website redesign", desc: "A personal redesign of the homepage for GhIPSS, which runs Ghana’s interbank payments: a clearer promise, the payment products in one place, and entry points for banks, regulators, retailers and developers.",
+    sector: "FINTECH · PAYMENTS", role: "UX · UI · WEB · CONCEPT", year: "2026", meta: "FINTECH · PAYMENTS · UX · UI · CONCEPT · 2026",
+    href: "/work/ghipss", cats: ["DESIGN", "PRODUCT"], thumb: img("ghipss", "top") },
 ];
