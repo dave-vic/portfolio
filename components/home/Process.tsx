@@ -7,10 +7,10 @@ import { at, t, u } from "@/lib/u";
 const EASE = [0.2, 0.7, 0.1, 1] as const;
 const LEDE = "Four stages. Hire me for one of them, or for the whole line. AI speeds up each step, I stay accountable for every decision.";
 const STAGES = [
-  { n: "1", name: "UNDERSTAND", note: "Users, numbers and the current process, before anyone draws a screen.", d: { x: 460, y: 740, w: 300, h: 560, size: 532, nx: 62, ny: 201, noteY: 650 } },
-  { n: "2", name: "SHAPE", note: "PRD, priorities and a plan the business signs off.", d: { x: 800, y: 440, w: 330, h: 860, size: 817, nx: -37, ny: 309, noteY: 350 } },
-  { n: "3", name: "DESIGN", note: "Journeys, a design system and a prototype people can test.", d: { x: 1170, y: 680, w: 280, h: 620, size: 589, nx: -6, ny: 223, noteY: 590 } },
-  { n: "4", name: "SHIP + GROW", note: "Hand-off, QA, then the pitch, the partners and the next customers.", d: { x: 1470, y: 320, w: 258, h: 980, size: 817, nx: -115, ny: 297, noteY: 230 } },
+  { n: "1", name: "UNDERSTAND", note: "Users, numbers and the current process, before anyone draws a screen.", d: { x: 420, y: 740, w: 300, h: 560, size: 532, nx: 62, ny: 201, noteY: 650 } },
+  { n: "2", name: "SHAPE", note: "PRD, priorities and a plan the business signs off.", d: { x: 752, y: 440, w: 330, h: 860, size: 817, nx: -37, ny: 309, noteY: 350 } },
+  { n: "3", name: "DESIGN", note: "Journeys, a design system and a prototype people can test.", d: { x: 1114, y: 680, w: 284, h: 620, size: 589, nx: -6, ny: 223, noteY: 590 } },
+  { n: "4", name: "SHIP + GROW", note: "Hand-off, QA, then the pitch, the partners and the next customers.", d: { x: 1418, y: 320, w: 310, h: 980, size: 817, nx: -62, ny: 297, noteY: 230 } },
 ];
 
 function Bar({ i, style, children }: { i: number; style: React.CSSProperties; children: React.ReactNode }) {
