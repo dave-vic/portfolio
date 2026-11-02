@@ -11,6 +11,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import MotionRoot from "@/components/MotionRoot";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://davida-dzato.vercel.app"),
   title: "Davida Dzato · Product designer",
   description:
     "Product designer for complex products with many kinds of users. Based in Accra, open to remote roles worldwide.",
