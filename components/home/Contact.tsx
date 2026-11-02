@@ -64,17 +64,23 @@ export default function Contact() {
       <div className="only-d sec" style={{ height: u(1117) }}>
         <motion.img className="bleed" loading="lazy" decoding="async" src="/home/hero-photo.jpg" alt="" style={{ position: "absolute", left: 0, top: "-1.57%", width: "100%", height: "103.13%", objectFit: "cover" }}
           initial={{ scale: 1.12, opacity: 0.6 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.6, ease: EASE }} />
+        {/* soft shade on the right so the contact links stay readable over the light paper in the photo */}
+        <div aria-hidden style={{ position: "absolute", top: 0, bottom: 0, right: "calc(-1 * var(--gx))", width: "calc(42% + var(--gx))", background: "linear-gradient(to left, rgba(70,22,6,.62), rgba(70,22,6,.38) 55%, rgba(70,22,6,0))", pointerEvents: "none" }} />
         {[["OPEN TO", "REMOTE ROLES WORLDWIDE", 56], ["BASED IN", "ACCRA, GHANA · GMT", 486], ["COPYRIGHT", "© 2026 DAVIDA DZATO", 916], ["WORKING ACROSS", "PRODUCT DESIGN · PM · ANALYSIS · AI", 1346]].map(([a, b, x]) => (
           <p key={a as string} className="mono abs" style={{ ...at(x as number, 40), ...t(11, 1.4, 0.22) }}>{a}<br />{b}</p>
         ))}
         <Letters text="LET’S" style={{ ...at(56, 280), ...t(240, 0.9, -14.4), fontWeight: 500 }} />
         <Letters text="BUILD" delay={0.15} style={{ ...at(1012, 280), ...t(240, 0.9, -14.4), fontWeight: 500 }} />
-        <motion.p className="serif abs" style={{ ...at(62, 500), ...t(24) }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Hire me</motion.p>
-        <motion.p className="serif abs" style={{ ...at(1028, 500), ...t(24) }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Connect online</motion.p>
+        <motion.p className="serif abs" style={{ ...at(62, 500), ...t(24), textShadow: "0 1px 12px rgba(0,0,0,.35)" }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Hire me</motion.p>
+        <motion.p className="serif abs" style={{ ...at(1028, 500), ...t(24), textShadow: "0 1px 12px rgba(0,0,0,.35)" }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}>Connect online</motion.p>
         <p className="abs" style={{ ...at(1638, 236), ...t(40) }}>®</p>
-        <p className="mono abs" style={{ ...at(1672, 640), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.5, 0.24) }}>EMAIL:<br /><a href={`mailto:${EMAIL}`}>{EMAIL.toUpperCase()}</a></p>
-        <p className="mono abs" style={{ ...at(1672, 740), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.5, 0.24) }}>SOCIAL:<br /><a href={LI} target="_blank" rel="noopener">LINKEDIN</a><br /><a href={GH} target="_blank" rel="noopener">GITHUB</a></p>
-        <p className="mono abs" style={{ ...at(1672, 840), transform: "translateX(-100%)", textAlign: "right", whiteSpace: "nowrap", ...t(12, 1.5, 0.24) }}>ELSEWHERE:<br /><a href="/Davida-Dzato-CV.pdf" download>DOWNLOAD CV ↓</a></p>
+        {/* contact details on a dark glass panel so they read clearly over the photo */}
+        <motion.div className="mono abs" style={{ ...at(1356, 610, 316), padding: `${u(26)} ${u(28)}`, background: "rgba(20,20,20,.62)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderRadius: u(14), border: "1px solid rgba(255,255,255,.14)", display: "grid", gap: u(22), ...t(14, 1.6, 0.28) }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: 1.6 }}>
+          <p><span style={{ color: "rgba(245,242,236,.6)" }}>EMAIL</span><br /><a href={`mailto:${EMAIL}`} style={{ textDecoration: "underline", textUnderlineOffset: u(4) }}>{EMAIL.toUpperCase()}</a></p>
+          <p><span style={{ color: "rgba(245,242,236,.6)" }}>SOCIAL</span><br /><a href={LI} target="_blank" rel="noopener" style={{ textDecoration: "underline", textUnderlineOffset: u(4) }}>LINKEDIN ↗</a><br /><a href={GH} target="_blank" rel="noopener" style={{ textDecoration: "underline", textUnderlineOffset: u(4) }}>GITHUB ↗</a></p>
+          <p><span style={{ color: "rgba(245,242,236,.6)" }}>ELSEWHERE</span><br /><a href="/Davida-Dzato-CV.pdf" download style={{ textDecoration: "underline", textUnderlineOffset: u(4) }}>DOWNLOAD CV ↓</a></p>
+        </motion.div>
         <p className="mono abs" style={{ ...at(56, 1069), ...t(12, "normal", 0.24) }}>DAVIDA DZATO</p>
         <button onClick={toTop} className="mono abs" style={{ ...at(816, 1069), ...t(12, "normal", 0.24), color: "var(--on-dark)" }}>(BACK TO TOP)</button>
         <p className="mono abs pre" style={{ ...at(1508, 1069), ...t(12, "normal", 0.24) }}><Link href="/work">WORK</Link>{"    "}<Link href="/about">ABOUT</Link>{"    "}<Link href="/">INDEX</Link></p>
@@ -97,10 +103,10 @@ export default function Contact() {
               </p>
               <p className="serif" style={{ ...t(T ? 20 : 17), fontStyle: "italic", marginTop: u(18) }}>Hire me. Connect online.</p>
               <div style={{ height: u(T ? 200 : 120), marginTop: u(18) }} />
-              <p className="mono" style={{ ...t(11, 1.5, 0.33), marginTop: u(18) }}>
-                EMAIL: <a href={`mailto:${EMAIL}`}>{EMAIL.toUpperCase()}</a><br />
-                SOCIAL: <a href={LI} target="_blank" rel="noopener">LINKEDIN</a> · <a href={GH} target="_blank" rel="noopener">GITHUB</a><br />
-                ELSEWHERE: <a href="/Davida-Dzato-CV.pdf" download>DOWNLOAD CV ↓</a>
+              <p className="mono" style={{ ...t(12, 1.8, 0.3), marginTop: u(18), padding: `${u(16)} ${u(18)}`, background: "rgba(20,20,20,.62)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderRadius: u(10), border: "1px solid rgba(255,255,255,.14)" }}>
+                EMAIL: <a href={`mailto:${EMAIL}`} style={{ textDecoration: "underline" }}>{EMAIL.toUpperCase()}</a><br />
+                SOCIAL: <a href={LI} target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>LINKEDIN</a> · <a href={GH} target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>GITHUB</a><br />
+                ELSEWHERE: <a href="/Davida-Dzato-CV.pdf" download style={{ textDecoration: "underline" }}>DOWNLOAD CV ↓</a>
               </p>
               <div style={{ marginTop: u(18), borderRadius: u(4), overflow: "hidden" }}><Form cols={T} pad={24} /></div>
               <div className="mono" style={{ display: "flex", justifyContent: "space-between", marginTop: u(18), ...t(11, 1.5, 0.33) }}>
