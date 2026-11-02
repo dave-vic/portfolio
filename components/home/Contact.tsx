@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import Link from "next/link";
 import { at, t, u } from "@/lib/u";
@@ -10,12 +10,11 @@ const LI = "https://www.linkedin.com/in/davida-dzato-b870021a0/";
 const GH = "https://github.com/dave-vic";
 
 function Letters({ text, style, delay = 0 }: { text: string; style: React.CSSProperties; delay?: number }) {
-  const reduce = useReducedMotion();
   return (
     <span aria-label={text} style={{ display: "inline-flex", overflow: "hidden", ...style }}>
       {[...text].map((c, i) => (
         <motion.span key={i} aria-hidden style={{ display: "inline-block" }}
-          initial={reduce ? false : { y: "70%", opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
+          initial={{ y: "70%", opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE, delay: delay + i * 0.05 }}>{c}</motion.span>
       ))}
     </span>
@@ -58,7 +57,6 @@ function Form({ cols, pad, width }: { cols: boolean; pad: number; width?: number
 }
 
 export default function Contact() {
-  const reduce = useReducedMotion();
   const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <section id="contact" data-label="(08) CONTACT" aria-labelledby="contact-h" style={{ color: "var(--on-dark)", position: "relative" }}>
@@ -80,7 +78,7 @@ export default function Contact() {
         <button onClick={toTop} className="mono abs" style={{ ...at(816, 1069), ...t(12, "normal", 0.24), color: "var(--on-dark)" }}>(BACK TO TOP)</button>
         <p className="mono abs pre" style={{ ...at(1508, 1069), ...t(12, "normal", 0.24) }}><Link href="/work">WORK</Link>{"    "}<Link href="/about">ABOUT</Link>{"    "}<Link href="/">INDEX</Link></p>
         <motion.div style={{ ...at(0, 800, 620) }}
-          initial={reduce ? false : { y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
+          initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
           transition={{ duration: 1, ease: EASE, delay: 0.4 }}>
           <Form cols pad={32} width={620} />
         </motion.div>

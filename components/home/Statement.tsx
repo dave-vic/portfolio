@@ -42,11 +42,10 @@ function Sentence({ size, ls, gap, pill, width }: { size: number; ls: number; ga
 }
 
 function Signature({ w, h }: { w: number; h: number }) {
-  const reduce = useReducedMotion();
   return (
     <motion.div
       style={{ width: u(w), height: u(h) }}
-      initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
       whileInView={{ clipPath: "inset(0 0% 0 0)" }}
       viewport={{ once: true }}
       transition={{ duration: 2.2, ease: EASE, delay: 0.3 }}

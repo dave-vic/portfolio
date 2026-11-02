@@ -8,6 +8,7 @@ import "@fontsource/doto/900.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import SmoothScroll from "@/components/SmoothScroll";
+import MotionRoot from "@/components/MotionRoot";
 
 export const metadata: Metadata = {
   title: "Davida Dzato · Product designer",
@@ -26,9 +27,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <SmoothScroll />
-        <Nav />
-        {children}
+        <MotionRoot>
+          <SmoothScroll />
+          <Nav />
+          {children}
+        </MotionRoot>
       </body>
     </html>
   );

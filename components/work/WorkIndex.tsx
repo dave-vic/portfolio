@@ -121,7 +121,7 @@ function List({ rows, bp }: { rows: Project[]; bp: BP }) {
       <AnimatePresence mode="popLayout" initial={false}>
         {rows.map((p, i) => (
           <motion.div key={p.n} layout={!reduce}
-            initial={reduce ? false : { opacity: 0, y: 48 }}
+            initial={{ opacity: 0, y: 48 }}
             whileInView={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, transition: { duration: 0.25 } }}
             viewport={{ once: true, margin: "0px 0px -6% 0px" }}

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
@@ -14,12 +14,11 @@ const SECTORS = [
 
 /** The photo inside the brackets: same crop as Figma, grows open on load */
 function Bracket({ w, h }: { w: number; h: number }) {
-  const reduce = useReducedMotion();
   return (
     <motion.span
       aria-hidden
       style={{ display: "block", position: "relative", height: u(h), overflow: "hidden", flex: "none" }}
-      initial={reduce ? false : { width: u(w * 0.12) }}
+      initial={{ width: u(w * 0.12) }}
       animate={{ width: u(w) }}
       transition={{ duration: 1.1, ease: EASE, delay: 0.35 }}
     >
@@ -29,12 +28,11 @@ function Bracket({ w, h }: { w: number; h: number }) {
 }
 
 function Line({ children, i, style }: { children: React.ReactNode; i: number; style?: React.CSSProperties }) {
-  const reduce = useReducedMotion();
   return (
     <span style={{ display: "block", overflow: "hidden", ...style }}>
       <motion.span
         style={{ display: "flex", alignItems: "center" }}
-        initial={reduce ? false : { y: "105%" }}
+        initial={{ y: "105%" }}
         animate={{ y: 0 }}
         transition={{ duration: 1, ease: EASE, delay: 0.1 + i * 0.12 }}
       >

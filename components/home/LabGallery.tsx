@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
@@ -39,13 +39,12 @@ function Corner({ children, href }: { children: React.ReactNode; href: string })
 }
 
 export default function LabGallery() {
-  const reduce = useReducedMotion();
   return (
     <section data-label="(06) LAB" aria-labelledby="lab">
       <div className="only-d sec" style={{ height: u(1117), background: "var(--bone)" }}>
         {CARDS.map((c, i) => (
           <motion.div key={c.img}
-            initial={reduce ? false : { opacity: 0, y: 70, rotateY: (3 - i) * -14 }}
+            initial={{ opacity: 0, y: 70, rotateY: (3 - i) * -14 }}
             whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
             viewport={{ once: true, margin: "0px 0px -10% 0px" }}
             transition={{ duration: 1, ease: EASE, delay: Math.abs(3 - i) * 0.08 }}
@@ -58,7 +57,7 @@ export default function LabGallery() {
           </motion.div>
         ))}
         <motion.h2 id="lab" className="sans abs"
-          initial={reduce ? false : { y: 120, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
+          initial={{ y: 120, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
           transition={{ duration: 1.1, ease: EASE, delay: 0.3 }}
           style={{ ...at(40, 835), ...t(340, 0.8, -20.4), fontWeight: 500, margin: 0 }}>Lab</motion.h2>
         <div style={{ ...at(1462, 887, 210, 44) }}><Corner href="/lab">SEE ALL EXPERIMENTS</Corner></div>

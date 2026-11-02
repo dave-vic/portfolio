@@ -33,7 +33,7 @@ function Front({ s, radius, shadow }: { s: (typeof SLIDES)[number]; radius: numb
   return (
     <AnimatePresence mode="popLayout" initial={false}>
       <motion.div key={s.img}
-        initial={reduce ? false : { opacity: 0, rotate: -6, x: "18%" }}
+        initial={{ opacity: 0, rotate: -6, x: "18%" }}
         animate={{ opacity: 1, rotate: 0, x: 0 }}
         exit={reduce ? undefined : { opacity: 0, rotate: 6, x: "-18%" }}
         transition={{ duration: 0.8, ease: EASE }}

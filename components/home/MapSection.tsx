@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import Reveal from "@/components/Reveal";
 import { at, t, u } from "@/lib/u";
 
@@ -25,7 +25,6 @@ const PINS = [
 const MARKS: [number, number][] = [[1214,974],[1265,944],[1103,934],[1305,934],[1062,924],[1133,924],[1315,924],[1356,913],[1082,903],[1295,903],[1346,903],[1082,883],[1447,883],[1174,863],[1133,853],[1174,843],[1244,843],[1558,843],[1406,832],[1427,812],[1103,802],[1174,782],[1406,782],[1427,772],[1457,772],[1386,762],[1315,751],[1366,741],[1224,711],[1487,681],[1224,670],[1356,670],[1255,640],[1265,630],[1477,620],[1174,589],[1457,579],[1487,569],[1305,559],[1143,549],[1224,549],[1376,539],[1113,529],[1204,519],[1123,478],[1366,458],[1113,448],[1153,448],[1457,438],[1133,428],[1143,417],[1406,397],[1386,367],[1417,357],[1153,336],[1386,336],[1184,316],[1437,316],[1214,306],[1366,306],[1437,215],[1305,205],[1194,195],[1285,195]];
 
 function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number; labels: boolean }) {
-  const reduce = useReducedMotion();
   const k = W / BOX.w, H = BOX.h * k;
   const X = (x: number) => (x - BOX.x) * k, Y = (y: number) => (y - BOX.y) * k;
   return (
@@ -34,7 +33,7 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
       <motion.img
         src="/home/points-ghana.svg" alt="Map of Ghana drawn in points"
         style={{ position: "absolute", left: u(X(1013.5)), top: u(Y(170.25)), width: u(590.3 * k), height: u(853.4 * k) }}
-        initial={reduce ? false : { clipPath: "inset(100% 0 0 0)" }}
+        initial={{ clipPath: "inset(100% 0 0 0)" }}
         whileInView={{ clipPath: "inset(0% 0 0 0)" }}
         viewport={{ once: true, margin: "0px 0px -15% 0px" }}
         transition={{ duration: 1.8, ease: EASE }}
@@ -46,7 +45,7 @@ function Cloud({ W, ring, dot, labels }: { W: number; ring: number; dot: number;
         const cx = X(p.r[0] + 14), cy = Y(p.r[1] + 14);
         return (
           <motion.div key={p.label}
-            initial={reduce ? false : { opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "0px 0px -15% 0px" }}
             transition={{ duration: 0.6, ease: EASE, delay: 0.9 + i * 0.15 }}

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
 
 const EASE = [0.2, 0.7, 0.1, 1] as const;
@@ -20,11 +20,10 @@ function Name({ size }: { size: number }) {
 
 /** panels slide in diagonally, as in the motion video */
 function Slide({ from, delay = 0, style, children }: { from: "l" | "r"; delay?: number; style: React.CSSProperties; children?: React.ReactNode }) {
-  const reduce = useReducedMotion();
   return (
     <motion.div
       style={style}
-      initial={reduce ? false : { opacity: 0, x: from === "l" ? -80 : 80, y: 30 }}
+      initial={{ opacity: 0, x: from === "l" ? -80 : 80, y: 30 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 1.05, ease: EASE, delay }}

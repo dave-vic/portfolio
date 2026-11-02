@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { at, t, u } from "@/lib/u";
 import { StaggerGroup, StaggerItem, EASE } from "@/components/about/Stagger";
 
@@ -40,13 +40,12 @@ function Corner({ children, href }: { children: React.ReactNode; href: string })
 }
 
 export default function LabHero() {
-  const reduce = useReducedMotion();
   return (
     <section data-label="(LAB) EXPERIMENTS" aria-label="Lab">
       <div className="only-d sec" style={{ height: u(1117), background: "var(--bone)" }}>
         {CARDS.map((c, i) => (
           <motion.div key={c.img}
-            initial={reduce ? false : { opacity: 0, y: 70, rotateY: (3 - i) * -14 }}
+            initial={{ opacity: 0, y: 70, rotateY: (3 - i) * -14 }}
             animate={{ opacity: 1, y: 0, rotateY: 0 }}
             transition={{ duration: 1.1, ease: EASE, delay: 0.15 + Math.abs(3 - i) * 0.09 }}
             style={{ position: "absolute", inset: 0, pointerEvents: "none", perspective: 1200 }}
@@ -58,10 +57,10 @@ export default function LabHero() {
           </motion.div>
         ))}
         <motion.h1 className="sans abs"
-          initial={reduce ? false : { y: 120, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+          initial={{ y: 120, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.2, ease: EASE, delay: 0.45 }}
           style={{ ...at(40, 835), ...t(340, 0.8, -20.4), fontWeight: 500, margin: 0 }}>Lab</motion.h1>
-        <motion.div initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }}>
           <div style={{ ...at(1462, 887, 210, 44) }}><Corner href="#experiments">SEE ALL EXPERIMENTS</Corner></div>
           <p className="abs" style={{ ...at(1672, 977, 460), transform: "translateX(-100%)", textAlign: "right", ...t(20, 1.4, -0.1) }}>{INTRO}</p>
         </motion.div>
@@ -88,7 +87,7 @@ export default function LabHero() {
               </StaggerGroup>
             </div>
             <div style={{ padding: `0 ${u(T ? 40 : 20)}`, marginTop: u(T ? 36 : 28), display: "flex", flexDirection: "column", alignItems: "flex-start", gap: u(16) }}>
-              <motion.h1 className="sans" initial={reduce ? false : { y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1.1, ease: EASE, delay: 0.3 }}
+              <motion.h1 className="sans" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1.1, ease: EASE, delay: 0.3 }}
                 style={{ ...t(T ? 220 : 150, 0.85, T ? -13.2 : -9), fontWeight: 500, margin: 0 }}>Lab</motion.h1>
               <p style={t(T ? 17 : 16, 1.45)}>{INTRO}</p>
               <a href="#experiments" className="mono pre" style={{ border: "1px solid var(--ink)", borderRadius: 99, padding: `${u(12)} ${u(20)}`, ...t(11, 1.5, 0.33) }}>{`SEE ALL EXPERIMENTS  →`}</a>

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import Reveal from "@/components/Reveal";
 import { at, t, u } from "@/lib/u";
 
@@ -13,10 +13,9 @@ const STAGES = [
 ];
 
 function Bar({ i, style, children }: { i: number; style: React.CSSProperties; children: React.ReactNode }) {
-  const reduce = useReducedMotion();
   // the wrapper is what scrolls into view; the white bar rises inside it
   return (
-    <motion.div style={{ ...style, overflow: "hidden" }} initial={reduce ? false : "hide"} whileInView="show" viewport={{ once: true, margin: "0px 0px -5% 0px" }}>
+    <motion.div style={{ ...style, overflow: "hidden" }} initial={"hide"} whileInView="show" viewport={{ once: true, margin: "0px 0px -5% 0px" }}>
       <motion.div
         style={{ position: "absolute", inset: 0, background: "#fff", overflow: "hidden" }}
         variants={{ hide: { y: "100%" }, show: { y: 0 } }}

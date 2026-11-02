@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { CSSProperties } from "react";
 import { at, t, u } from "@/lib/u";
 
@@ -50,7 +50,6 @@ const M: Layout = {
 const FROM = { top: { y: "-22%", x: 0 }, bottom: { y: "22%", x: 0 }, left: { x: "-40%", y: 0 }, right: { x: "40%", y: 0 } };
 
 function Header({ L, cls }: { L: Layout; cls: string }) {
-  const reduce = useReducedMotion();
   const o = L.off;
   const mono = (s: number, ls: number): CSSProperties => ({ ...t(s, 1.5, ls) });
   return (
@@ -58,7 +57,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
       {/* giant WORK */}
       <motion.p className="anton abs nowrap" aria-hidden
         style={{ ...at(L.work.x, L.work.y + o), ...t(L.work.size, 1, L.work.ls), color: "var(--laterite)", margin: 0 }}
-        initial={reduce ? false : { opacity: 0, y: u(60) }} animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: u(60) }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.1, ease: EASE }}>WORK</motion.p>
 
       {/* tiles slide / drop in over the word */}
@@ -69,7 +68,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
         );
         return (
           <motion.div key={k.src + i} style={{ ...at(k.x, k.y + o, k.w, k.h), overflow: "hidden" }}
-            initial={reduce ? false : { opacity: 0, ...FROM[k.from] }} animate={{ opacity: 1, x: 0, y: 0 }}
+            initial={{ opacity: 0, ...FROM[k.from] }} animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 1, ease: EASE, delay: 0.35 + i * 0.12 }}>
             {k.href ? <Link href={k.href} aria-label={k.label} style={{ display: "block", width: "100%", height: "100%", position: "relative" }}>{inner}</Link> : inner}
           </motion.div>
@@ -79,7 +78,7 @@ function Header({ L, cls }: { L: Layout; cls: string }) {
       {L.tags.map((g, i) => (
         <motion.div key={g.a} className="mono abs" aria-hidden
           style={{ ...at(g.x, g.y + o), background: "var(--bone)", padding: `${u(L.padY)} ${u(L.padX)}`, color: "var(--laterite)", whiteSpace: "pre", ...mono(L.tagSize, L.tagSize * 0.03) }}
-          initial={reduce ? false : { opacity: 0, y: u(12) }} animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: u(12) }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 1 + i * 0.1 }}>
           {g.a}<br />{g.b}
         </motion.div>

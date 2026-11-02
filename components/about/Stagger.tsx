@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import type { CSSProperties, ReactNode } from "react";
 
 export const EASE = [0.2, 0.7, 0.1, 1] as const;
@@ -11,13 +11,12 @@ export const EASE = [0.2, 0.7, 0.1, 1] as const;
 export function StaggerGroup({
   children, style, className, gap = 0.08, delay = 0, amount = 0.15, as = "div",
 }: { children: ReactNode; style?: CSSProperties; className?: string; gap?: number; delay?: number; amount?: number; as?: "div" | "section" | "ul" }) {
-  const reduce = useReducedMotion();
   const M = motion[as];
   return (
     <M
       className={className}
       style={style}
-      initial={reduce ? false : "hidden"}
+      initial={"hidden"}
       whileInView="show"
       viewport={{ once: true, amount }}
       variants={{ hidden: {}, show: { transition: { staggerChildren: gap, delayChildren: delay } } }}
